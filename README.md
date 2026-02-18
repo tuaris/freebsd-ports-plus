@@ -6,7 +6,13 @@ Extra FreeBSD ports not yet available in the official FreeBSD ports tree. Pre-bu
 
 | Port | Description |
 |------|-------------|
+| `databases/arcadedb` | ArcadeDB - Multi-model database (pending upstream PR) |
+| `net-p2p/bfgminer` | BFGMiner - Modular ASIC/FPGA Bitcoin miner (FreeBSD fork) |
+| `net-p2p/cpuminer-opt` | CPU miner with architecture-specific optimizations |
+| `net/pecl-zmq` | PHP ZMQ extension (pending upstream PR) |
 | `security/openbao-agent` | OpenBao Agent - auto-auth and token sink daemon |
+| `sysutils/terragrunt487` | Terragrunt 0.48.7 - Thin wrapper for Terraform |
+| `www/sunlight` | Sunlight - Certificate Transparency log implementation |
 
 > **Note:** `security/openbao` is already part of the official FreeBSD ports tree and does not need this overlay.
 
@@ -18,19 +24,19 @@ To install packages from this repository, create the following configuration fil
 
 ```sh
 mkdir -p /usr/local/etc/pkg/repos
-cat > /usr/local/etc/pkg/repos/PortsPlus.conf << 'EOF'
+cat > /usr/local/etc/pkg/repos/PortsPlus.conf << 'CONF'
 PortsPlus: {
   url: "pkg+http://pkg.morante.net/plus/${ABI}",
   enabled: yes
 }
-EOF
+CONF
 ```
 
 Then update the package catalog and install:
 
 ```sh
 pkg update
-pkg install openbao openbao-agent
+pkg install openbao-agent bfgminer cpuminer-opt
 ```
 
 ## Supported Versions

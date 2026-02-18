@@ -6,8 +6,9 @@ Extra FreeBSD ports not yet available in the official FreeBSD ports tree. Pre-bu
 
 | Port | Description |
 |------|-------------|
-| `security/openbao` | OpenBao - Tool for securely accessing secrets |
 | `security/openbao-agent` | OpenBao Agent - auto-auth and token sink daemon |
+
+> **Note:** `security/openbao` is already part of the official FreeBSD ports tree and does not need this overlay.
 
 ## Enabling the Ports Plus Repository
 

@@ -1,0 +1,6 @@
+@sample etc/bao-agent.hcl.sample
+etc/newsyslog.conf.d/openbao_agent.conf
+%%EXAMPLESDIR%%/openbao_agent.monit
+@dir(%%USER%%,%%GROUP%%,700) etc/bao
+@dir(%%USER%%,%%GROUP%%,755) /var/run/bao
+@dir %%EXAMPLESDIR%%

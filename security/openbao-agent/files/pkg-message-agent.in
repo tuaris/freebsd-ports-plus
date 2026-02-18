@@ -1,0 +1,29 @@
+[
+{ type: install
+  message: <<EOM
+OpenBao Agent has been installed.
+
+To configure the agent:
+
+1. Copy the sample configuration:
+   cp %%PREFIX%%/etc/bao-agent.hcl.sample %%PREFIX%%/etc/bao-agent.hcl
+
+2. Place your AppRole credentials in %%BAOSECRETDIR%%/:
+   - role-id   (from: bao read auth/approle/role/<role>/role-id)
+   - secret-id (from: bao write -f auth/approle/role/<role>/secret-id)
+
+   Ensure correct ownership and permissions:
+   chown %%USER%%:%%GROUP%% %%BAOSECRETDIR%%/role-id %%BAOSECRETDIR%%/secret-id
+   chmod 600 %%BAOSECRETDIR%%/role-id %%BAOSECRETDIR%%/secret-id
+
+3. Enable and start the agent:
+   sysrc openbao_agent_enable=YES
+   service openbao_agent start
+
+The agent writes its token to /var/run/bao/token (mode 0600).
+
+A sample Monit configuration is installed at:
+%%PREFIX%%/share/examples/openbao-agent/openbao_agent.monit
+EOM
+}
+]

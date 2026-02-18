@@ -1,0 +1,2 @@
+# logfilename				[owner:group]	mode	count	size	when	flags
+/var/log/openbao_agent.log			openbao:openbao	640	7	1000	*	JB

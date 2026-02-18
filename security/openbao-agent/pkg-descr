@@ -1,0 +1,4 @@
+OpenBao Agent is a client daemon that provides auto-authentication and
+token sink functionality. It authenticates with an OpenBao server using
+a configured method (e.g., AppRole) and writes the resulting token to a
+sink file for use by other applications on the same host.

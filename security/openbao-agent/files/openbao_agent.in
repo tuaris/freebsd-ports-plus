@@ -1,0 +1,82 @@
+#!/bin/sh
+
+# PROVIDE: openbao_agent
+# REQUIRE: LOGIN NETWORKING
+# KEYWORD: shutdown
+#
+# Add the following lines to /etc/rc.conf.local or /etc/rc.conf
+# to enable this service:
+#
+# openbao_agent_enable (bool):			Set it to YES to enable openbao agent.
+#						Default is "NO".
+# openbao_agent_user (user):			Set user to run openbao agent.
+#						Default is "%%USER%%".
+# openbao_agent_group (group):			Set group to run openbao agent.
+#						Default is "%%GROUP%%".
+# openbao_agent_config (file):			Set openbao agent config file.
+#						Default is "%%PREFIX%%/etc/bao-agent.hcl".
+# openbao_agent_syslog_output_enable (bool):	Set to enable syslog output.
+#						Default is "NO". See daemon(8).
+# openbao_agent_syslog_output_priority (str):	Set syslog priority if syslog enabled.
+#						Default is "info". See daemon(8).
+# openbao_agent_syslog_output_facility (str):	Set syslog facility if syslog enabled.
+#						Default is "daemon". See daemon(8).
+
+. /etc/rc.subr
+
+name=openbao_agent
+rcvar=openbao_agent_enable
+
+load_rc_config $name
+
+: ${openbao_agent_enable:="NO"}
+: ${openbao_agent_user:="%%USER%%"}
+: ${openbao_agent_group:="%%GROUP%%"}
+: ${openbao_agent_config:="%%PREFIX%%/etc/bao-agent.hcl"}
+: ${openbao_agent_logfile:="/var/log/openbao_agent.log"}
+
+DAEMON=$(/usr/sbin/daemon 2>&1 | grep -q syslog ; echo $?)
+if [ ${DAEMON} -eq 0 ]; then
+	: ${openbao_agent_syslog_output_enable:="NO"}
+	: ${openbao_agent_syslog_output_priority:="info"}
+	: ${openbao_agent_syslog_output_facility:="daemon"}
+	if checkyesno openbao_agent_syslog_output_enable; then
+		openbao_agent_syslog_output_flags="-T ${name}"
+
+		if [ -n "${openbao_agent_syslog_output_priority}" ]; then
+			openbao_agent_syslog_output_flags="${openbao_agent_syslog_output_flags} -s ${openbao_agent_syslog_output_priority}"
+		fi
+
+		if [ -n "${openbao_agent_syslog_output_facility}" ]; then
+			openbao_agent_syslog_output_flags="${openbao_agent_syslog_output_flags} -l ${openbao_agent_syslog_output_facility}"
+		fi
+	fi
+else
+	openbao_agent_syslog_output_enable="NO"
+	openbao_agent_syslog_output_flags=""
+fi
+
+pidfile="/var/run/bao/${name}.pid"
+procname="%%PREFIX%%/bin/bao"
+command="/usr/sbin/daemon"
+command_args="-f -t ${name} ${openbao_agent_syslog_output_flags} -p ${pidfile} -o ${openbao_agent_logfile} ${procname} agent -config=${openbao_agent_config}"
+
+start_precmd=openbao_agent_startprecmd
+required_files="${openbao_agent_config}"
+
+openbao_agent_startprecmd()
+{
+	if [ ! -d /var/run/bao ]; then
+		install -d -o ${openbao_agent_user} -g ${openbao_agent_group} -m 755 /var/run/bao
+	fi
+
+	if [ ! -e ${pidfile} ]; then
+		install -o ${openbao_agent_user} -g ${openbao_agent_group} -m 644 /dev/null ${pidfile}
+	fi
+
+	if [ ! -e ${openbao_agent_logfile} ]; then
+		install -o ${openbao_agent_user} -g ${openbao_agent_group} -m 640 /dev/null ${openbao_agent_logfile}
+	fi
+}
+
+run_rc_command "$1"

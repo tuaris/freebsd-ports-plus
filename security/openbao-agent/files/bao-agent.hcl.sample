@@ -1,0 +1,34 @@
+# OpenBao Agent configuration
+# See: https://openbao.org/docs/agent-and-proxy/agent/
+
+vault {
+  address = "http://127.0.0.1:8200"
+}
+
+# Local API listener for health checks and caching proxy
+api_proxy {
+  use_auto_auth_token = true
+}
+
+listener "tcp" {
+  address     = "127.0.0.1:8100"
+  tls_disable = true
+}
+
+auto_auth {
+  method "approle" {
+    mount_path = "auth/approle"
+    config = {
+      role_id_file_path   = "/usr/local/etc/bao/role-id"
+      secret_id_file_path = "/usr/local/etc/bao/secret-id"
+      remove_secret_id_file_after_reading = false
+    }
+  }
+
+  sink "file" {
+    config = {
+      path = "/var/run/bao/token"
+      mode = 0600
+    }
+  }
+}

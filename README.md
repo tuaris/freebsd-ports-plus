@@ -9,7 +9,6 @@ Extra FreeBSD ports not yet available in the official FreeBSD ports tree. Pre-bu
 | `databases/arcadedb` | ArcadeDB - Multi-model database (pending upstream PR) |
 | `net-p2p/bfgminer` | BFGMiner - Modular ASIC/FPGA Bitcoin miner (FreeBSD fork) |
 | `net-p2p/cpuminer-opt` | CPU miner with architecture-specific optimizations |
-| `net/pecl-zmq` | PHP ZMQ extension (pending upstream PR) |
 | `net/smoothmq` | SmoothMQ - Drop-in SQS replacement with UI and observability |
 | `security/openbao-agent` | OpenBao Agent - auto-auth and token sink daemon |
 | `sysutils/terragrunt487` | Terragrunt 0.48.7 - Thin wrapper for Terraform |

@@ -38,6 +38,7 @@ pkg install openbao openbao-agent
 |-----------------|-----|
 | 13.5 | `FreeBSD:13:amd64` |
 | 14.3 | `FreeBSD:14:amd64` |
+| 15.0 | `FreeBSD:15:amd64` |
 
 ## Contributing
 

@@ -1,0 +1,20 @@
+[
+{ type: install
+  message: <<EOM
+  A basic configuration file has already been setup at %%SUNLIGHT_CONFIG%%. To 
+  get started, refer to the documentation at:
+
+   https://github.com/FiloSottile/sunlight/blob/main/README.md#global-configuration
+
+  If using SQLite, create the checkpoints database using:
+
+  sqlite3 %%SUNLIGHT_DBDIR%%/checkpoints.db \
+     "CREATE TABLE checkpoints (logID BLOB PRIMARY KEY, body TEXT)"
+
+  Then assign it the correct permissions:
+
+  chown %%SUNLIGHT_USER%%:%%SUNLIGHT_GROUP%% %%SUNLIGHT_DBDIR%%/checkpoints.db
+EOM
+}
+]
+

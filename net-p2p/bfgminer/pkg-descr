@@ -1,0 +1,10 @@
+BFGMiner is a modular ASIC/FPGA miner written in C, featuring dynamic
+clocking, monitoring, and fanspeed support for bitcoin and derivative
+coins. This is a fork with FreeBSD compatibility patches.
+
+Features:
+- Support for multiple mining devices (ASIC, FPGA, GPU, CPU)
+- Stratum and getwork protocol support
+- Multiple blockchain/pool support
+- Dynamic clocking and monitoring
+- Remote API interface

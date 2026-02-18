@@ -1,0 +1,26 @@
+[
+{ type: install
+  message: <<EOM
+ArcadeDB installed.
+
+Configuration files: /var/db/arcadedb/config/
+Data directory: /var/db/arcadedb/databases/
+
+Setup root password:
+  mkdir -p %%PREFIX%%/etc/arcadedb
+  printf "yourpassword" > %%PREFIX%%/etc/arcadedb/rootpassword
+  chown arcadedb:arcadedb %%PREFIX%%/etc/arcadedb/rootpassword
+  chmod 400 %%PREFIX%%/etc/arcadedb/rootpassword
+
+Note: The password file is only read on first start. To change the password
+later, stop the service, remove /var/db/arcadedb/config/server-users.jsonl,
+update the password file, and restart the service.
+
+To start ArcadeDB:
+  1. Enable: sysrc arcadedb_enable=YES
+  2. Start: service arcadedb start
+
+Web console: http://localhost:2480
+EOM
+}
+]

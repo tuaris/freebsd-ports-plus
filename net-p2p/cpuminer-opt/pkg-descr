@@ -1,0 +1,10 @@
+cpuminer-opt is an optimized multi-algorithm CPU miner for Bitcoin,
+Litecoin, and other cryptocurrencies. It is a fork of cpuminer-multi
+with additional optimizations for modern CPUs including support for
+AVX2, AVX512, SHA, and AES-NI instructions.
+
+Features:
+- Optimized for Intel and AMD x86_64 processors
+- Supports 80+ mining algorithms
+- Stratum and GBT protocol support
+- Low system resource usage

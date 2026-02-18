@@ -1,0 +1,3 @@
+bin/sunlight
+@sample %%ETCDIR%%.yaml.sample
+@dir(%%SUNLIGHT_USER%%,%%SUNLIGHT_GROUP%%,) %%SUNLIGHT_DBDIR%%

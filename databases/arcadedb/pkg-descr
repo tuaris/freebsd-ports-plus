@@ -1,0 +1,15 @@
+ArcadeDB is a Multi-Model DBMS built for extreme performance, supporting:
+
+- Graph Database (compatible with Neo4j Cypher, Apache Gremlin, OrientDB SQL)
+- Document Database (compatible with MongoDB driver and queries)
+- Key/Value (compatible with Redis driver)
+- Search Engine
+- Time Series
+- Vector Embeddings
+
+ArcadeDB understands multiple query languages: SQL, Cypher, Gremlin, GraphQL,
+and MongoDB Query Language. It can be accessed via HTTP/JSON API, Postgres
+wire protocol, Redis driver, or MongoDB driver.
+
+Written in Java 21+ using low-level APIs for minimal garbage collector pressure
+and maximum performance. Runs from Raspberry Pi to cloud clusters.

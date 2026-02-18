@@ -1,0 +1,53 @@
+#!/bin/sh
+
+# PROVIDE: arcadedb
+# REQUIRE: LOGIN
+# KEYWORD: shutdown
+#
+# Add these lines to /etc/rc.conf to enable this service:
+#
+# arcadedb_enable (bool):	Set to NO by default.
+#				Set it to YES to enable arcadedb.
+# arcadedb_user (str):		User to run as. Default: %%ARCADEDB_USER%%
+# arcadedb_group (str):		Group to run as. Default: %%ARCADEDB_GROUP%%
+# arcadedb_data (str):		Data directory. Default: /var/db/arcadedb
+# arcadedb_rootpwfile (str):	Path to root password file.
+# arcadedb_java_opts (str):	Additional JVM arguments.
+
+. /etc/rc.subr
+
+name=arcadedb
+rcvar=arcadedb_enable
+desc="ArcadeDB multi-model database server"
+
+load_rc_config $name
+
+: ${arcadedb_enable:="NO"}
+: ${arcadedb_user:="%%ARCADEDB_USER%%"}
+: ${arcadedb_group:="%%ARCADEDB_GROUP%%"}
+: ${arcadedb_data:="/var/db/arcadedb"}
+: ${arcadedb_rootpwfile:="%%PREFIX%%/etc/arcadedb/rootpassword"}
+: ${arcadedb_java_opts:=""}
+
+pidfile="/var/run/${name}/${name}.pid"
+procname="%%JAVA_HOME%%/bin/java"
+required_files="${arcadedb_rootpwfile}"
+
+arcadedb_env="ARCADEDB_PID=${pidfile} \
+	ARCADEDB_SETTINGS=-Darcadedb.server.rootPath=${arcadedb_data}\ -Djava.util.logging.config.file=${arcadedb_data}/config/arcadedb-log.properties\ -Darcadedb.server.rootPasswordPath=${arcadedb_rootpwfile}"
+
+command="/usr/sbin/daemon"
+command_args="-f -p ${pidfile} %%DATADIR%%/bin/server.sh ${arcadedb_java_opts}"
+
+start_precmd="${name}_prestart"
+
+arcadedb_prestart()
+{
+	install -d -o ${arcadedb_user} -m 755 /var/run/${name}
+	install -d -o ${arcadedb_user} -g ${arcadedb_group} -m 750 /var/log/${name}
+	install -d -o ${arcadedb_user} -g ${arcadedb_group} -m 750 ${arcadedb_data}
+	install -d -o ${arcadedb_user} -g ${arcadedb_group} -m 750 ${arcadedb_data}/databases
+	install -d -o ${arcadedb_user} -g ${arcadedb_group} -m 750 ${arcadedb_data}/backups
+}
+
+run_rc_command "$1"

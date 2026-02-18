@@ -1,0 +1,6 @@
+listen:
+  - ":8443"
+acme:
+  cache: /var/db/sunlight/autocert/
+
+checkpoints: /var/db/sunlight/checkpoints.db

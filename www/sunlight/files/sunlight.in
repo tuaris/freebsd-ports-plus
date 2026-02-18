@@ -1,0 +1,71 @@
+#!/bin/sh
+
+# PROVIDE: sunlight
+# REQUIRE: LOGIN
+# KEYWORD: shutdown
+
+# Add the following lines to /etc/rc.conf to enable sunlight
+# sunlight_enable="YES"
+#
+# sunlight_enable (bool):
+#     Set it to YES to enable grafana
+#     Set to NO by default
+# sunlight_user (string):
+#     Set user that grafana will run under
+#     Default is "%%SUNLIGHT_USER%%"
+# sunlight_group (string):
+#     Set group that own grafana files
+#     Default is "%%SUNLIGHT_GROUP%%"
+# sunlight_config (string)
+#     Set full path to config file
+#     Default is "%%SUNLIGHT_CONFIG%%"
+# sunlight_logfile (string)
+#     Set full path to log file
+#     Default is "/var/log/sunlight/sunlight.log"
+# sunlight_loglevel (string)
+#     Set log level. Only log messages with the given severity or above.
+#     Valid levels: [debug, info, warn, error]
+#     Default is "warn"
+# sunlight_args (string)
+#     Set additional command line arguments
+#     Default is ""
+
+. /etc/rc.subr
+
+name=sunlight
+rcvar=sunlight_enable
+
+load_rc_config $name
+
+: ${sunlight_enable:="NO"}
+: ${sunlight_user:="%%SUNLIGHT_USER%%"}
+: ${sunlight_group:="%%SUNLIGHT_GROUP%%"}
+: ${sunlight_config:="%%SUNLIGHT_CONFIG%%"}
+: ${sunlight_dbdir:="%%SUNLIGHT_DBDIR%%"}
+: ${sunlight_logfile:="/var/log/sunlight/sunlight.log"}
+
+pidfile="/var/run/${name}/${name}.pid"
+required_files="${sunlight_config}"
+
+procname="%%PREFIX%%/bin/sunlight"
+command="/usr/sbin/daemon"
+start_precmd=sunlight_start_precmd
+command_args="-p ${pidfile} -t ${name} -o ${sunlight_logfile} ${procname} \
+	-c ${sunlight_config}"
+
+sunlight_start_precmd()
+{
+	if [ ! -e /var/run/${name} ]; then
+		install -d -m 0750 -o ${sunlight_user} -g ${sunlight_group} /var/run/${name};
+	fi
+
+	if [ ! -e /var/log/${name} ]; then
+		install -d -m 0750 -o ${sunlight_user} -g ${sunlight_group} /var/log/${name};
+	fi
+
+	if [ ! -e ${sunlight_dbdir} ]; then
+		install -d -m 0750 -o ${sunlight_user} -g ${sunlight_group} ${sunlight_dbdir};
+	fi
+}
+
+run_rc_command "$1"

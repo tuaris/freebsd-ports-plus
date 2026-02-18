@@ -1,0 +1,10 @@
+bin/smoothmq
+@sample etc/smoothmq.yaml.sample
+@owner %%SMOOTHMQ_USER%%
+@group %%SMOOTHMQ_GROUP%%
+@mode 750
+@dir %%SMOOTHMQ_DATADIR%%
+@mode
+@group
+@owner
+

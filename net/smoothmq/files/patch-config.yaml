@@ -1,0 +1,9 @@
+--- config.yaml.orig	1979-11-30 05:00:00 UTC
++++ config.yaml
+@@ -12,4 +12,4 @@ server:
+     port: 3000
+ 
+   sqlite:
+-    path: smoothmq.sqlite
+\ No newline at end of file
++    path: /var/db/smoothmq/smoothmq.sqlite

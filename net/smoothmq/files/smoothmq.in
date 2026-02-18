@@ -1,0 +1,71 @@
+#!/bin/sh
+
+# PROVIDE: smoothmq
+# REQUIRE: LOGIN
+# KEYWORD: shutdown
+
+# Add the following lines to /etc/rc.conf to enable smoothmq
+# smoothmq_enable="YES"
+#
+# smoothmq_enable (bool):
+#     Set it to YES to enable grafana
+#     Set to NO by default
+# smoothmq_user (string):
+#     Set user that grafana will run under
+#     Default is "%%SMOOTHMQ_USER%%"
+# smoothmq_group (string):
+#     Set group that own grafana files
+#     Default is "%%SMOOTHMQ_GROUP%%"
+# smoothmq_config (string)
+#     Set full path to config file
+#     Default is "%%PREFIX%%/etc/smoothmq.yaml"
+# smoothmq_logfile (string)
+#     Set full path to log file
+#     Default is "/var/log/smoothmq/smoothmq.log"
+# smoothmq_loglevel (string)
+#     Set log level. Only log messages with the given severity or above.
+#     Valid levels: [debug, info, warn, error]
+#     Default is "warn"
+# smoothmq_args (string)
+#     Set additional command line arguments
+#     Default is ""
+
+. /etc/rc.subr
+
+name=smoothmq
+rcvar=smoothmq_enable
+
+load_rc_config $name
+
+: ${smoothmq_enable:="NO"}
+: ${smoothmq_user:="%%SMOOTHMQ_USER%%"}
+: ${smoothmq_group:="%%SMOOTHMQ_GROUP%%"}
+: ${smoothmq_config:="%%PREFIX%%/etc/smoothmq.yaml"}
+: ${smoothmq_logfile:="/var/log/smoothmq/smoothmq.log"}
+: ${smoothmq_loglevel:="warn"}
+
+pidfile="/var/run/${name}/${name}.pid"
+required_files="${smoothmq_config}"
+
+procname="%%PREFIX%%/bin/smoothmq"
+command="/usr/sbin/daemon"
+start_precmd=start_precmd
+command_args="-p ${pidfile} -t ${name} -o ${smoothmq_logfile} \
+	${procname} \
+	--config=${smoothmq_config} \
+	--log-pretty \
+	--log-level="${smoothmq_loglevel}" \
+	server ${smoothmq_args}"
+
+start_precmd()
+{
+	if [ ! -e /var/run/${name} ]; then
+		install -d -m 0750 -o ${smoothmq_user} -g ${smoothmq_group} /var/run/${name};
+	fi
+
+	if [ ! -e /var/log/${name} ]; then
+		install -d -m 0750 -o ${smoothmq_user} -g ${smoothmq_group} /var/log/${name};
+	fi
+}
+
+run_rc_command "$1"

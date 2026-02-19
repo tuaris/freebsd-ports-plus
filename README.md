@@ -27,7 +27,7 @@ To install packages from this repository, create the following configuration fil
 mkdir -p /usr/local/etc/pkg/repos
 cat > /usr/local/etc/pkg/repos/PortsPlus.conf << 'CONF'
 PortsPlus: {
-  url: "pkg+http://pkg.morante.net/plus/${ABI}",
+  url: "http://pkg.morante.net/plus/${ABI}",
   enabled: yes
 }
 CONF

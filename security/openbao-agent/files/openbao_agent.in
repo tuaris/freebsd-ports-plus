@@ -15,6 +15,12 @@
 #						Default is "%%GROUP%%".
 # openbao_agent_config (file):			Set openbao agent config file.
 #						Default is "%%PREFIX%%/etc/bao-agent.hcl".
+# openbao_agent_sinkdir (path):			Optional directory for agent file sink output.
+#						Default is empty (disabled).
+# openbao_agent_sinkdir_group (group):		Group ownership for the sink directory.
+#						Default is openbao_agent_group.
+# openbao_agent_sinkdir_mode (mode):		Permissions for the sink directory.
+#						Default is "2750" (setgid).
 # openbao_agent_syslog_output_enable (bool):	Set to enable syslog output.
 #						Default is "NO". See daemon(8).
 # openbao_agent_syslog_output_priority (str):	Set syslog priority if syslog enabled.
@@ -34,6 +40,9 @@ load_rc_config $name
 : ${openbao_agent_group:="%%GROUP%%"}
 : ${openbao_agent_config:="%%PREFIX%%/etc/bao-agent.hcl"}
 : ${openbao_agent_logfile:="/var/log/openbao_agent.log"}
+: ${openbao_agent_sinkdir:=""}
+: ${openbao_agent_sinkdir_group:="${openbao_agent_group}"}
+: ${openbao_agent_sinkdir_mode:="2750"}
 
 DAEMON=$(/usr/sbin/daemon 2>&1 | grep -q syslog ; echo $?)
 if [ ${DAEMON} -eq 0 ]; then
@@ -68,6 +77,13 @@ openbao_agent_startprecmd()
 {
 	if [ ! -d /var/run/bao ]; then
 		install -d -o ${openbao_agent_user} -g ${openbao_agent_group} -m 755 /var/run/bao
+	fi
+
+	if [ -n "${openbao_agent_sinkdir}" ] && [ ! -d "${openbao_agent_sinkdir}" ]; then
+		install -d -o ${openbao_agent_user} -g ${openbao_agent_sinkdir_group} -m ${openbao_agent_sinkdir_mode} "${openbao_agent_sinkdir}"
+	elif [ -n "${openbao_agent_sinkdir}" ] && [ -d "${openbao_agent_sinkdir}" ]; then
+		chown ${openbao_agent_user}:${openbao_agent_sinkdir_group} "${openbao_agent_sinkdir}"
+		chmod ${openbao_agent_sinkdir_mode} "${openbao_agent_sinkdir}"
 	fi
 
 	if [ ! -e ${pidfile} ]; then

@@ -1,0 +1,11 @@
+CGMiner is a combined FPGA and ASIC miner written in C with Scrypt
+algorithm support. This is a FreeBSD fork based on cgminer 4.8.0 with
+Zeus, GridSeed, and Lketc Scrypt ASIC driver support.
+
+Features:
+- Scrypt algorithm mining (Litecoin and derivatives)
+- Zeus/ZeusMiner/GAW Fury ASIC support
+- GridSeed ASIC support
+- Lketc ASIC support
+- Stratum protocol support
+- Remote API interface

@@ -1,1 +1,2 @@
+zetacoin:*:780:780::0:0:ZetaCoin Daemon:/nonexistent:/usr/sbin/nologin
 arcadedb:*:801:801::0:0:ArcadeDB Daemon:/var/db/arcadedb:/usr/sbin/nologin

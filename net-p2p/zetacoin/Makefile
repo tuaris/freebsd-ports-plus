@@ -1,118 +1,91 @@
 PORTNAME=	zetacoin
-DISTVERSIONPREFIX=	v
-DISTVERSION=	0.13.2.1
+PORTVERSION=	0.14.0
 CATEGORIES=	net-p2p finance
+MASTER_SITES=	https://github.com/tuaris/${PORTNAME}/archive/refs/tags/
+DISTNAME=	v${PORTVERSION}
+DIST_SUBDIR=	${PORTNAME}
 
 MAINTAINER=	daniel@morante.net
-COMMENT?=	Virtual Peer-to-Peer Currency Client
-WWW=		https://www.zetacoin.com/
+COMMENT?=	Virtual Peer-to-Peer Currency Client (QT)
+WWW=		https://github.com/tuaris/zetacoin
 
 LICENSE=	MIT
 
-LIB_DEPENDS=	libboost_date_time.so:devel/boost-libs \
-		libfmt.so:devel/libfmt \
+WRKSRC=		${WRKDIR}/${PORTNAME}-${PORTVERSION}
+
+BUILD_DEPENDS=	boost-libs>=1.74:devel/boost-libs
+
+LIB_DEPENDS=	libcapnp.so:devel/capnproto \
 		libevent.so:devel/libevent
-
-USES=		autoreconf compiler:c++17-lang cpe gmake libtool localbase pkgconfig qt:5 shebangfix ssl
-
-USE_GITHUB=	yes
-GNU_CONFIGURE=	yes
-USE_CXXSTD=	c++17 # fix build with clang16 due to use of deprecated feature std::random_shuffle
-GNU_CONFIGURE_MANPREFIX=${PREFIX}/share
 
 SLAVE_PORT?=	no
 
+USES=		cmake compiler:c++20-lang cpe pkgconfig
 .if defined(SLAVE_PORT) && ${SLAVE_PORT} == "no"
-USES+=		desktop-file-utils
-USE_QT=		core gui network widgets \
-		buildtools:build linguisttools:build qmake:build
-
-BUILD_DEPENDS+=	protoc:devel/protobuf3
-LIB_DEPENDS+=	libprotobuf.so:devel/protobuf3
-
-TESTS_USE=		QT=testlib
-TESTS_PLIST_FILES=	bin/test_${PORTNAME}-qt \
-			bin/test_${PORTNAME}
+USES+=		desktop-file-utils gl qt:6
+USE_QT=		base tools:build
+USE_GL=		opengl
 .endif
 
-OPTIONS_DEFINE?=	DBUS DEBUG HARDENING QRCODES TESTS UPNP WALLET_BDBMODERN ZMQ
-OPTIONS_DEFAULT?=	DBUS HARDENING QRCODES UPNP WALLET_BDBMODERN ZMQ
+CMAKE_ARGS?=	-DBUILD_GUI=ON \
+		-DBUILD_BITCOIN_BIN=OFF \
+		-DBUILD_CLI=OFF \
+		-DBUILD_DAEMON=OFF \
+		-DBUILD_SHARED_LIBS=OFF \
+		-DBUILD_TX=OFF \
+		-DBUILD_UTIL=OFF \
+		-DBUILD_WALLET_TOOL=OFF
+
+PLIST_FILES?=	bin/zetacoin-qt \
+		share/applications/zetacoin-qt.desktop \
+		share/man/man1/zetacoin-qt.1.gz \
+		share/pixmaps/zetacoin128.png
+
+OPTIONS_DEFINE?=	DBUS DEBUG HARDENING QRCODES TESTS WALLET ZMQ
+OPTIONS_DEFAULT?=	DBUS HARDENING QRCODES WALLET ZMQ
 OPTIONS_SUB=		yes
 
 HARDENING_DESC=	Attempt to harden binaries (PIE for ASLR, NX Stack)
 QRCODES_DESC=	Display QR Codes
 TESTS_DESC=	Build test binary and unit tests
-WALLET_BDBMODERN_DESC=	Wallet using modern BDB 18.x
+WALLET_DESC=	Wallet Management Support
 ZMQ_DESC=	Block and transaction broadcasting with ZeroMQ
 
-DBUS_CONFIGURE_WITH=	dbus
-DBUS_USE=		QT=dbus
+DBUS_CMAKE_BOOL=	WITH_DBUS
 
-DEBUG_CONFIGURE_ENABLE=		debug
-DEBUG_INSTALL_TARGET_OFF=	install-strip
+DEBUG_CMAKE_ON=		-DCMAKE_BUILD_TYPE=Debug
+DEBUG_CMAKE_OFF=	-DCMAKE_BUILD_TYPE=Release
 
-HARDENING_CONFIGURE_ENABLE=	hardening
+HARDENING_CMAKE_BOOL=	ENABLE_HARDENING
 
-TESTS_CONFIGURE_ENABLE=	tests bench
-.if defined(SLAVE_PORT) && ${SLAVE_PORT} == "yes"
-TESTS_PLIST_FILES=	bin/test_${PORTNAME}
-.endif
-TESTS_PLIST_FILES+=	bin/bench_${PORTNAME}
-
-UPNP_CONFIGURE_WITH=	miniupnpc
-UPNP_LIB_DEPENDS=	libminiupnpc.so:net/miniupnpc
-
-QRCODES_CONFIGURE_WITH=	qrencode
 QRCODES_LIB_DEPENDS=	libqrencode.so:graphics/libqrencode
+QRCODES_CMAKE_BOOL=	WITH_QRENCODE
 
-ZMQ_CONFIGURE_ENABLE=	zmq
-ZMQ_LIB_DEPENDS=	libzmq.so:net/libzmq4
-
-GH_ACCOUNT=	${PORTNAME}
-
-CONFIGURE_ARGS?=	--without-libs \
-			--with-gui=qt5 \
-			--without-daemon \
-			--without-utils
-
-CONFIGURE_ENV=	CRYPTO_CFLAGS="-I${OPENSSLINC}" CRYPTO_LIBS="-L${OPENSSLLIB} -lcrypto" \
-		SSL_CFLAGS="-I${OPENSSLINC}" SSL_LIBS="-L${OPENSSLLIB} -lssl" \
-		OBJCXX="${CXX}" OBJCXXFLAGS="${CXXFLAGS}"
-MAKE_ENV+=	V=1
-
-PLIST_FILES?=	bin/${PORTNAME}-qt \
-		share/applications/${PORTNAME}-qt.desktop share/pixmaps/${PORTNAME}.png
-
-.include <bsd.port.options.mk>
-
-.if ${PORT_OPTIONS:MWALLET_BDBMODERN}
-CONFIGURE_ARGS+=	--enable-wallet --with-incompatible-bdb
-USES+=			bdb:18
-.else
-CONFIGURE_ARGS+=	--disable-wallet
+TESTS_CMAKE_BOOL=	BUILD_BENCH BUILD_TESTS SECP256K1_BUILD_TESTS
+TESTS_PLIST_FILES=	libexec/bench_bitcoin \
+			libexec/test_bitcoin
+.if defined(SLAVE_PORT) && ${SLAVE_PORT} == "no"
+TESTS_PLIST_FILES+=	libexec/test_bitcoin-qt
 .endif
+
+WALLET_USES=		sqlite:3
+WALLET_CMAKE_ON=	-DENABLE_WALLET=ON
+WALLET_CMAKE_OFF=	-DENABLE_WALLET=OFF
+
+ZMQ_BUILD_DEPENDS=	libzmq4>0:net/libzmq4
+ZMQ_RUN_DEPENDS=	libzmq4>0:net/libzmq4
+ZMQ_CMAKE_BOOL=		WITH_ZMQ
 
 .include <bsd.port.pre.mk>
-
-.if ${PORT_OPTIONS:MWALLET_BDBMODERN}
-CPPFLAGS+=	-I${BDB_INCLUDE_DIR}
-LIBS+=		-L${BDB_LIB_DIR}
-.endif
 
 .if defined(SLAVE_PORT) && ${SLAVE_PORT} == "no"
 
 post-install:
-	${INSTALL} ${FILESDIR}/${PORTNAME}-qt.desktop \
-		${STAGEDIR}${PREFIX}/share/applications/
-	${INSTALL} ${WRKSRC}/share/pixmaps/bitcoin256.png \
-		${STAGEDIR}${PREFIX}/share/pixmaps/${PORTNAME}.png
+	${INSTALL} ${FILESDIR}/zetacoin-qt.desktop \
+		${STAGEDIR}${PREFIX}/share/applications
+	${INSTALL} ${FILESDIR}/zetacoin128.png \
+		${STAGEDIR}${PREFIX}/share/pixmaps/
 
 .endif
-
-regression-test: build
-	# To use this sucessfully, remove --without-daemon and --without-utils
-	# from CONFIGURE_ARGS above.
-
-	@cd ${WRKSRC} && ${GMAKE} check
 
 .include <bsd.port.post.mk>

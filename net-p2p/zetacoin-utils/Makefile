@@ -1,22 +1,33 @@
-MASTERDIR=	${.CURDIR}/../zetacoin
 PKGNAMESUFFIX=	-utils
 
 COMMENT=	Virtual Peer-to-Peer Currency (CLI and Utilities)
+
 SLAVE_PORT=	yes
 
-OPTIONS_DEFINE=		DEBUG HARDENING TESTS ZMQ
-OPTIONS_RADIO=
+CMAKE_ARGS=	-DBUILD_BITCOIN_BIN=ON \
+		-DBUILD_CLI=ON \
+		-DBUILD_TX=ON \
+		-DBUILD_UTIL=ON \
+		-DBUILD_DAEMON=OFF \
+		-DBUILD_GUI=OFF \
+		-DBUILD_SHARED_LIBS=OFF
 
-PKGHELP=	${NONEXISTENT}
+MASTERDIR=	${.CURDIR}/../zetacoin
 
-CONFIGURE_ARGS=	--without-daemon \
-		--without-gui \
-		--without-libs \
-		--without-qrencode \
-		--without-miniupnpc \
-		--with-utils \
-		--disable-wallet
+PLIST_FILES=	bin/zetacoin \
+		bin/zetacoin-cli \
+		bin/zetacoin-tx \
+		bin/zetacoin-util \
+		share/man/man1/zetacoin-cli.1.gz \
+		share/man/man1/zetacoin-tx.1.gz \
+		share/man/man1/zetacoin-util.1.gz \
+		share/man/man1/zetacoin.1.gz
 
-PLIST_FILES=	bin/zetacoin-cli bin/zetacoin-tx
+OPTIONS_DEFINE=		DEBUG HARDENING TESTS WALLET
+OPTIONS_DEFAULT=	HARDENING TESTS WALLET
+
+WALLET_CMAKE_BOOL+=	ENABLE_WALLET_TOOL
+WALLET_PLIST_FILES+=	bin/zetacoin-wallet \
+			share/man/man1/zetacoin-wallet.1.gz
 
 .include "${MASTERDIR}/Makefile"

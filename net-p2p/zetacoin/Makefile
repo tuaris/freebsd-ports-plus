@@ -1,17 +1,16 @@
 PORTNAME=	zetacoin
-PORTVERSION=	0.14.0
+DISTVERSIONPREFIX=	v
+DISTVERSION=	0.14.0-rc1
 CATEGORIES=	net-p2p finance
-MASTER_SITES=	https://github.com/tuaris/${PORTNAME}/archive/refs/tags/
-DISTNAME=	v${PORTVERSION}
-DIST_SUBDIR=	${PORTNAME}
+
+USE_GITHUB=	yes
+GH_ACCOUNT=	tuaris
 
 MAINTAINER=	daniel@morante.net
 COMMENT?=	Virtual Peer-to-Peer Currency Client (QT)
 WWW=		https://github.com/tuaris/zetacoin
 
 LICENSE=	MIT
-
-WRKSRC=		${WRKDIR}/${PORTNAME}-${PORTVERSION}
 
 BUILD_DEPENDS=	boost-libs>=1.74:devel/boost-libs
 
@@ -37,6 +36,7 @@ CMAKE_ARGS?=	-DBUILD_GUI=ON \
 		-DBUILD_WALLET_TOOL=OFF
 
 PLIST_FILES?=	bin/zetacoin-qt \
+		libexec/zetacoin-gui \
 		share/applications/zetacoin-qt.desktop \
 		share/man/man1/zetacoin-qt.1.gz \
 		share/pixmaps/zetacoin128.png
@@ -62,10 +62,10 @@ QRCODES_LIB_DEPENDS=	libqrencode.so:graphics/libqrencode
 QRCODES_CMAKE_BOOL=	WITH_QRENCODE
 
 TESTS_CMAKE_BOOL=	BUILD_BENCH BUILD_TESTS SECP256K1_BUILD_TESTS
-TESTS_PLIST_FILES=	libexec/bench_bitcoin \
-			libexec/test_bitcoin
+TESTS_PLIST_FILES=	libexec/bench_zetacoin \
+			libexec/test_zetacoin
 .if defined(SLAVE_PORT) && ${SLAVE_PORT} == "no"
-TESTS_PLIST_FILES+=	libexec/test_bitcoin-qt
+TESTS_PLIST_FILES+=	libexec/test_zetacoin-qt
 .endif
 
 WALLET_USES=		sqlite:3

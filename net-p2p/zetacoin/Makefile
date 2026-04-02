@@ -4,11 +4,12 @@ DISTVERSION=	0.14.0-rc2
 CATEGORIES=	net-p2p finance
 
 USE_GITHUB=	yes
-GH_ACCOUNT=	tuaris
+GH_ACCOUNT=	zetacoin-core
+GH_PROJECT=	gui
 
 MAINTAINER=	daniel@morante.net
 COMMENT?=	Virtual Peer-to-Peer Currency Client (QT)
-WWW=		https://github.com/tuaris/zetacoin
+WWW=		https://github.com/zetacoin-core/gui
 
 LICENSE=	MIT
 

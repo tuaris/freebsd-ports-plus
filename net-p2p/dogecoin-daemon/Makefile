@@ -11,6 +11,8 @@ OPTIONS_DEFAULT=	HARDENING UPNP WALLET_BDBMODERN ZMQ
 USES+=		cpe
 CPE_VERSION=	${PORTVERSION:R}
 
+RUN_DEPENDS=	dogecoin-cli:net-p2p/dogecoin-utils
+
 #USERS=		dogecoin
 #GROUPS=		dogecoin
 

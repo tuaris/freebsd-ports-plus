@@ -1,6 +1,7 @@
 PORTNAME=	pepecoin
 DISTVERSIONPREFIX=	v
 DISTVERSION=	1.1.0
+PORTREVISION=	1
 CATEGORIES=	net-p2p finance
 
 MAINTAINER=	daniel@morante.net

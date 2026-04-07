@@ -11,6 +11,8 @@ OPTIONS_DEFAULT=	HARDENING UPNP WALLET_BDBMODERN ZMQ
 USES+=		cpe
 CPE_VERSION=	${PORTVERSION:R}
 
+RUN_DEPENDS=	pepecoin-cli:net-p2p/pepecoin-utils
+
 #USERS=		pepecoin
 #GROUPS=		pepecoin
 

@@ -73,7 +73,7 @@ extra_commands="reindex"
     %%PORTNAME%%_requirepidfile
 
 	echo "Stopping ${name}."
-	eval ${command} -conf=${%%PORTNAME%%_config} -datadir=${%%PORTNAME%%_datadir} stop
+	eval ${cli_command} -conf=${%%PORTNAME%%_config} -datadir=${%%PORTNAME%%_datadir} stop
 	wait_for_pids ${rc_pid}
 }
 

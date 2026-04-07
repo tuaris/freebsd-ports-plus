@@ -1,6 +1,7 @@
 PORTNAME=	dogecoin
 DISTVERSIONPREFIX=	v
 DISTVERSION=	1.14.9
+PORTREVISION=	1
 CATEGORIES=	net-p2p finance
 
 MAINTAINER=	daniel@morante.net

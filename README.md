@@ -7,6 +7,8 @@ Extra FreeBSD ports not yet available in the official FreeBSD ports tree. Pre-bu
 | Port | Description |
 |------|-------------|
 | `databases/arcadedb` | ArcadeDB - Multi-model database (pending upstream PR) |
+| `databases/mongodb50` | MongoDB Community Edition 5.0.x (preserved after upstream EOL removal) |
+| `databases/mongodb60` | MongoDB Community Edition 6.0.x (preserved after upstream EOL removal) |
 | `net-p2p/bfgminer` | BFGMiner - Modular ASIC/FPGA Bitcoin miner (FreeBSD fork) |
 | `net-p2p/cpuminer-opt` | CPU miner with architecture-specific optimizations |
 | `net/pecl-zmq` | PHP ZMQ extension - ZeroMQ bindings (PHP 8.5 patched) |

@@ -1,0 +1,12 @@
+A minimal compatibility shim that translates Linux runuser(1) invocations
+into FreeBSD su(1) calls.
+
+Linux runuser syntax:  runuser USER -s SHELL -c COMMAND
+FreeBSD translation:   su -m USER -c COMMAND
+
+The -s SHELL argument is intentionally ignored; FreeBSD su -m uses the
+target user's login shell or /bin/sh, which is sufficient for all known
+callers (e.g., FreePBX pm2 module).
+
+This allows Linux software that hardcodes runuser(1) to work unmodified
+on FreeBSD without patching individual source files.

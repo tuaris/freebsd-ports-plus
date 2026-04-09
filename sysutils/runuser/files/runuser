@@ -1,0 +1,31 @@
+#!/bin/sh
+# runuser(1) compatibility shim for FreeBSD
+# Translates: runuser USER -s SHELL -c COMMAND
+# Into:       su -m USER -c COMMAND
+#
+# The -s SHELL argument is intentionally ignored; FreeBSD su -m
+# uses /bin/sh which is sufficient for all known callers.
+
+user=""
+cmd=""
+
+while [ $# -gt 0 ]; do
+    case "$1" in
+        -s) shift ;; # consume and discard shell arg
+        -c) shift; cmd="$1" ;;
+        -*) ;; # ignore unknown flags
+        *)  [ -z "$user" ] && user="$1" ;;
+    esac
+    shift
+done
+
+if [ -z "$user" ]; then
+    echo "runuser: missing user operand" >&2
+    exit 1
+fi
+
+if [ -n "$cmd" ]; then
+    exec su -m "$user" -c "$cmd"
+else
+    exec su -m "$user"
+fi

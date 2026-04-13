@@ -1,0 +1,6 @@
+[
+{
+  "type": "install",
+  "message": "To load the amr kernel modules at boot, add the following to /boot/loader.conf:\n\n    amr_load=\"YES\"\n    amr_cam_load=\"YES\"\n\nTo load them immediately without rebooting:\n\n    kldload amr\n    kldload amr_cam"
+}
+]

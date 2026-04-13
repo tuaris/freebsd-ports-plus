@@ -1,0 +1,10 @@
+This port provides the amr(4) kernel module for LSI Logic / American Megatrends
+MegaRAID SCSI/ATA/SATA RAID controllers.
+
+The amr(4) driver was removed from the FreeBSD base system before FreeBSD 14.0.
+This port allows users with MegaRAID hardware (e.g., Dell PowerEdge servers)
+to continue using their RAID controllers on FreeBSD 14.x and later.
+
+The port builds two kernel modules:
+  amr.ko     - Core MegaRAID driver (PCI attachment, disk interface)
+  amr_cam.ko - CAM interface for SCSI passthrough

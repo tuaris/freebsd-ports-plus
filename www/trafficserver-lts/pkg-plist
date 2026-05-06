@@ -143,7 +143,7 @@ libexec/trafficserver/generator.so
 libexec/trafficserver/geoip_acl.so
 libexec/trafficserver/header_freq.so
 libexec/trafficserver/header_rewrite.so
-libexec/trafficserver/healthchecks.so
+%%HEALTHCHECKS%%libexec/trafficserver/healthchecks.so
 libexec/trafficserver/hook-trace.so
 libexec/trafficserver/http_stats.so
 libexec/trafficserver/icap.so

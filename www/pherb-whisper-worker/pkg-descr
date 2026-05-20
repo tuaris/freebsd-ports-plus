@@ -1,0 +1,7 @@
+Lightweight NATS-based worker that runs whisper-cli for the Pherb
+speech processing orchestrator. Subscribes to transcription requests
+via NATS, converts audio to WAV via ffmpeg if needed, executes
+whisper-cli, and replies with the JSON transcript.
+
+Built with Zig using kqueue-based I/O for zero-CPU idle wait.
+Runs on the host alongside whisper-cli and audio models.

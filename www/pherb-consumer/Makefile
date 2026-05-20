@@ -49,5 +49,6 @@ do-install:
 post-install:
 	@${REINPLACE_CMD} 's|/../system/bootstrap.inc.php|/system/bootstrap.inc.php|' \
 		${STAGEDIR}${LIBEXECDIR}/pherb-consumer
+	@${LN} -sf ${ETCDIR} ${STAGEDIR}${LIBEXECDIR}/config
 
 .include "${MASTERDIR}/Makefile"

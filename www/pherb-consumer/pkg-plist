@@ -64,6 +64,7 @@
 %%LIBEXECDIR%%/libraries/EnchiladaREST/EnchiladaRequest.class.php
 %%LIBEXECDIR%%/libraries/EnchiladaREST/EnchiladaResponse.class.php
 %%LIBEXECDIR%%/libraries/Psr/Log/LoggerInterface.php
+%%LIBEXECDIR%%/config
 %%LIBEXECDIR%%/schema/001_initial.sql
 %%LIBEXECDIR%%/system/app.conf.php
 %%LIBEXECDIR%%/system/autoload.inc.php

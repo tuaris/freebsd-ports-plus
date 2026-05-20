@@ -1,5 +1,5 @@
 PORTNAME?=	pherb
-PORTVERSION=	0.1.1
+PORTVERSION=	0.1.3
 CATEGORIES=	www
 MASTER_SITES=	https://github.com/tuaris/pherb/archive/refs/tags/
 DISTNAME=	v${PORTVERSION}

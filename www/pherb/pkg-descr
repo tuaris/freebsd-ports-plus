@@ -1,0 +1,13 @@
+Pherb - Speech Processing Orchestrator
+
+PHP-based transcription orchestrator that coordinates whisper.cpp,
+pyannote speaker diarization, and wav2vec2 alignment services via
+NATS JetStream. Produces speaker-attributed transcripts in JSON,
+SRT, and VTT formats.
+
+This meta-port installs all Pherb components:
+
+- pherb-api: REST API backend (Apache + mod_php)
+- pherb-consumer: NATS JetStream consumer daemon
+
+For individual component installation, install the specific packages.

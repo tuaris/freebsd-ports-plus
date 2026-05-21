@@ -5,7 +5,10 @@ www/pherb/classes/Pherb/OutputFormatter.class.php
 www/pherb/classes/Pherb/PyannoteClient.class.php
 www/pherb/classes/Pherb/TranscriptMerger.class.php
 www/pherb/classes/Pherb/Wav2vec2Client.class.php
+www/pherb/classes/Pherb/WhisperBackend.interface.php
+www/pherb/classes/Pherb/WhisperCliBackend.class.php
 www/pherb/classes/Pherb/WhisperClient.class.php
+www/pherb/classes/Pherb/WhisperNatsBackend.class.php
 @sample www/pherb/config/settings.ini.sample
 www/pherb/includes/database.inc.php
 www/pherb/includes/settings.inc.php

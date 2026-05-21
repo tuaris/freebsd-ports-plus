@@ -26,7 +26,4 @@ WRKSRC=		${WRKDIR}/pherb-${DISTVERSION}/cmd/whisper-worker
 
 PLIST_FILES=	bin/whisper-worker
 
-do-install:
-	${INSTALL_PROGRAM} ${WRKSRC}/zig-out/bin/whisper-worker ${STAGEDIR}${PREFIX}/bin/whisper-worker
-
 .include <bsd.port.mk>

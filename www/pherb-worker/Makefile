@@ -28,7 +28,4 @@ WRKSRC=		${WRKDIR}/pherb-${DISTVERSION}/cmd/pherb-worker
 
 PLIST_FILES=	bin/pherb-worker
 
-do-install:
-	${INSTALL_PROGRAM} ${WRKSRC}/zig-out/bin/pherb-worker ${STAGEDIR}${PREFIX}/bin/pherb-worker
-
 .include <bsd.port.mk>

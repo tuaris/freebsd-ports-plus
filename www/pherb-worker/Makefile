@@ -1,5 +1,5 @@
 PORTNAME=	pherb-worker
-DISTVERSION=	0.4.0
+DISTVERSION=	0.5.0
 CATEGORIES=	www audio
 MASTER_SITES=	https://github.com/tuaris/pherb/archive/refs/tags/:pherb
 DISTFILES=	v${DISTVERSION}${EXTRACT_SUFX}:pherb
@@ -26,6 +26,14 @@ SUB_LIST=	PREFIX=${PREFIX}
 
 WRKSRC=		${WRKDIR}/pherb-${DISTVERSION}/cmd/pherb-worker
 
-PLIST_FILES=	bin/pherb-worker
+ETCDIR=		${PREFIX}/etc/pherb
+
+PLIST_FILES=	bin/pherb-worker \
+		@sample ${ETCDIR}/worker.conf.sample
+
+post-install:
+	@${MKDIR} ${STAGEDIR}${ETCDIR}
+	${INSTALL_DATA} ${WRKDIR}/pherb-${DISTVERSION}/config/worker.conf.sample \
+		${STAGEDIR}${ETCDIR}/worker.conf.sample
 
 .include <bsd.port.mk>

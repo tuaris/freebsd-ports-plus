@@ -1,13 +1,11 @@
 %%LIBEXECDIR%%/pherb-consumer
 %%LIBEXECDIR%%/classes/Pherb/JobStore.class.php
 %%LIBEXECDIR%%/classes/Pherb/OutputFormatter.class.php
+%%LIBEXECDIR%%/classes/Pherb/PipelineDispatcher.class.php
 %%LIBEXECDIR%%/classes/Pherb/PyannoteClient.class.php
 %%LIBEXECDIR%%/classes/Pherb/TranscriptMerger.class.php
 %%LIBEXECDIR%%/classes/Pherb/Wav2vec2Client.class.php
-%%LIBEXECDIR%%/classes/Pherb/WhisperBackend.interface.php
 %%LIBEXECDIR%%/classes/Pherb/WhisperCliBackend.class.php
-%%LIBEXECDIR%%/classes/Pherb/WhisperClient.class.php
-%%LIBEXECDIR%%/classes/Pherb/WhisperNatsBackend.class.php
 %%LIBEXECDIR%%/includes/database.inc.php
 %%LIBEXECDIR%%/includes/settings.inc.php
 %%LIBEXECDIR%%/libraries/Basis/Nats/Api.php

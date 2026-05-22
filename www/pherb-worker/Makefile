@@ -29,7 +29,7 @@ WRKSRC=		${WRKDIR}/pherb-${DISTVERSION}/cmd/pherb-worker
 ETCDIR=		${PREFIX}/etc/pherb
 
 PLIST_FILES=	bin/pherb-worker \
-		@sample etc/pherb/worker.conf.sample
+		etc/pherb/worker.conf.sample
 
 post-install:
 	@${MKDIR} ${STAGEDIR}${ETCDIR}

@@ -1,0 +1,10 @@
+Multi-stage ML pipeline worker for the Pherb speech processing
+orchestrator. Handles whisper transcription, pyannote diarization,
+and wav2vec2 alignment stages via NATS subscriptions.
+
+Spawns child processes (whisper-cli, curl) and monitors them via
+kqueue for zero-CPU idle wait. Publishes completion events to
+pherb.pipeline.completed for the consumer state machine.
+
+Built with Zig using kqueue-based I/O. Runs on the host alongside
+whisper-cli, audio models, and ML service endpoints.

@@ -1,0 +1,39 @@
+#!/bin/sh
+#
+# PROVIDE: pherb_worker
+# REQUIRE: LOGIN nats
+# KEYWORD: shutdown
+#
+# Add the following lines to /etc/rc.conf to enable pherb_worker:
+#
+# pherb_worker_enable="YES"
+#
+
+. /etc/rc.subr
+
+name="pherb_worker"
+rcvar="${name}_enable"
+
+load_rc_config $name
+
+: ${pherb_worker_enable:="NO"}
+: ${pherb_worker_user:="root"}
+
+pidfile="/var/run/${name}/${name}.pid"
+logfile="/var/log/${name}.log"
+
+procname="%%PREFIX%%/bin/pherb-worker"
+command="/usr/sbin/daemon"
+command_args="-f -p ${pidfile} -o ${logfile} -S -T ${name} ${procname}"
+
+start_precmd="${name}_prestart"
+
+pherb_worker_prestart()
+{
+    /usr/bin/install -d -o ${pherb_worker_user} -m 755 ${pidfile%/*}
+    if [ ! -f "${logfile}" ]; then
+        /usr/bin/install -o ${pherb_worker_user} -m 640 /dev/null ${logfile}
+    fi
+}
+
+run_rc_command "$1"

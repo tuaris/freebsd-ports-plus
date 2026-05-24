@@ -1,7 +1,7 @@
 PORTNAME=	pherb-diarize
 DISTVERSIONPREFIX=	v
 DISTVERSION=	0.5.7
-CATEGORIES=	audio python
+CATEGORIES=	www audio python
 
 MAINTAINER=	daniel@morante.net
 COMMENT=	Pyannote speaker diarization stage for Pherb

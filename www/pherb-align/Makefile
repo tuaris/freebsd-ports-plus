@@ -1,7 +1,7 @@
 PORTNAME=	pherb-align
 DISTVERSIONPREFIX=	v
 DISTVERSION=	0.5.5
-CATEGORIES=	audio python
+CATEGORIES=	www audio python
 
 MAINTAINER=	daniel@morante.net
 COMMENT=	Wav2vec2 forced word-level alignment stage for Pherb

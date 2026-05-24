@@ -1,6 +1,6 @@
-TIMESTAMP = 1779519154
-SHA256 (pherb/v0.5.4.tar.gz) = b5471777f67e65063baeab5c2a3aabc63d8b75fe46e5ca8772547c978d755322
-SIZE (pherb/v0.5.4.tar.gz) = 72454
+TIMESTAMP = 1748052399
+SHA256 (pherb/v0.5.5.tar.gz) = 43b1069b732ef4d2bffbdac77e7ebb750c1d859cb52301b965dc28a60981cda7
+SIZE (pherb/v0.5.5.tar.gz) = 76078
 SHA256 (pherb/main.tar.gz) = d10de8c3b7f60eb3f60688ff2aa95691e85380211edb313d4bbe529cbe23780a
 SIZE (pherb/main.tar.gz) = 136281
 SHA256 (pherb/3ac234eae165177cd75742f922851dc5d.tar.gz) = bcda5af0639c1392f55f909536759bb0df254c9966d1f9bdd9f828212c221816

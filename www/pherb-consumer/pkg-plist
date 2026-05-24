@@ -61,6 +61,7 @@
 %%LIBEXECDIR%%/libraries/Enchilada/Daemon/DaemonBehavior.trait.php
 %%LIBEXECDIR%%/libraries/Enchilada/SQL/MigrationRunner.class.php
 %%LIBEXECDIR%%/libraries/EnchiladaHTTP/EnchiladaHTTP.class.php
+%%LIBEXECDIR%%/libraries/EnchiladaOTLP/EnchiladaOTLP.class.php
 %%LIBEXECDIR%%/libraries/EnchiladaREST/EnchiladaREST.class.php
 %%LIBEXECDIR%%/libraries/EnchiladaREST/EnchiladaRequest.class.php
 %%LIBEXECDIR%%/libraries/EnchiladaREST/EnchiladaResponse.class.php

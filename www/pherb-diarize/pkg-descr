@@ -1,0 +1,3 @@
+Pyannote-based speaker diarization stage for the Pherb speech
+processing pipeline. Uses pyannote.audio 3.x Pipeline API to identify
+who spoke when, producing timestamped speaker segments from audio.

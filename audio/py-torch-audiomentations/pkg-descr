@@ -1,0 +1,4 @@
+torch-audiomentations provides fast, GPU-accelerated audio data
+augmentation transforms for PyTorch. Supports operations like gain,
+polarity inversion, noise addition, and pitch shifting on batches
+of audio tensors.

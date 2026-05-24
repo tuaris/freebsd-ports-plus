@@ -1,0 +1,3 @@
+julius is a fast PyTorch-based library for digital signal processing
+of audio and 1D signals. It provides efficient implementations of
+lowpass filters, highpass filters, bandpass filters, and resampling.

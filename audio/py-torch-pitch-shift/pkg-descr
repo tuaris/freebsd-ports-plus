@@ -1,0 +1,2 @@
+Attempt to implement the pitch-shift audio transformation using PyTorch.
+Utilizes resampling and windowing to shift pitch without changing duration.

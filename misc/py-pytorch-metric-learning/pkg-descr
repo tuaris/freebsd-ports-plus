@@ -1,0 +1,3 @@
+PyTorch Metric Learning is a library for computing metric learning
+losses, miners, and trainers. Provides implementations of common
+loss functions like triplet loss, contrastive loss, and more.

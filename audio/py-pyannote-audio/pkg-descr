@@ -1,0 +1,6 @@
+pyannote.audio is an open-source toolkit for speaker diarization.
+Based on PyTorch, it provides state-of-the-art pretrained models and
+pipelines for identifying who spoke when in audio recordings.
+
+Features include voice activity detection, speaker segmentation,
+overlapped speech detection, and end-to-end speaker diarization.

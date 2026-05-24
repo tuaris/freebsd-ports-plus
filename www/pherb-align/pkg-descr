@@ -1,0 +1,4 @@
+Wav2vec2-based forced word-level alignment stage for the Pherb speech
+processing pipeline. Uses torchaudio's CTC forced alignment with the
+WAV2VEC2_ASR_BASE_960H model to produce precise word-level timestamps
+from a transcript and audio file.

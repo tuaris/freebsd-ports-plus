@@ -1,0 +1,3 @@
+pyannote.pipeline provides a framework for defining and optimizing
+speaker diarization pipelines with tunable hyperparameters, using
+Optuna for Bayesian optimization.

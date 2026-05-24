@@ -1,0 +1,3 @@
+pyannote.metrics provides evaluation metrics for speaker diarization,
+including Diarization Error Rate (DER), Jaccard Error Rate (JER),
+coverage, purity, and other standard speech processing metrics.

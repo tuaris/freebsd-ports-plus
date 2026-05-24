@@ -1,0 +1,3 @@
+Python SDK for the pyannote.ai cloud speaker diarization API.
+Provides a client for interacting with the commercial pyannote
+service endpoints.

@@ -1,0 +1,3 @@
+pyannote.database provides a standardized protocol for loading and
+iterating over speaker diarization, speaker verification, and speaker
+change detection datasets.

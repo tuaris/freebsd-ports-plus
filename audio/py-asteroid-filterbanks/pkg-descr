@@ -1,0 +1,3 @@
+Audio filterbanks implemented in PyTorch, from the Asteroid source
+separation project. Provides learnable and fixed filterbank layers
+for audio processing neural networks.

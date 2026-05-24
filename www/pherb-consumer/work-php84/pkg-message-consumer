@@ -1,0 +1,22 @@
+[
+{ type: install
+  message: <<EOM
+Pherb consumer daemon installed.
+
+1. Copy and edit the configuration file:
+   cp /usr/local/etc/pherb/settings.ini.sample /usr/local/etc/pherb/settings.ini
+
+2. Enable and start the consumer:
+   sysrc pherb_consumer_enable=YES
+   service pherb_consumer start
+
+3. Check consumer health:
+   service pherb_consumer health
+
+The consumer auto-creates the NATS JetStream stream and durable
+consumer on first connect. Database migrations apply automatically.
+
+See: https://docs.pacyworld.com/books/ai-speech-processing/chapter/pherb-orchestrator
+EOM
+}
+]

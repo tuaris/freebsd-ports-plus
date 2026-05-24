@@ -68,6 +68,7 @@
 %%LIBEXECDIR%%/libraries/Psr/Log/LoggerInterface.php
 %%LIBEXECDIR%%/config
 %%LIBEXECDIR%%/schema/001_initial.sql
+%%LIBEXECDIR%%/schema/002_current_stage.sql
 %%LIBEXECDIR%%/system/app.conf.php
 %%LIBEXECDIR%%/system/autoload.inc.php
 %%LIBEXECDIR%%/system/bootstrap.inc.php

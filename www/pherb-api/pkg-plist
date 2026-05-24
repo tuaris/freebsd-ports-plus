@@ -63,6 +63,7 @@ www/pherb/libraries/Enchilada/Config/IniConfig.php
 www/pherb/libraries/Enchilada/Daemon/DaemonBehavior.trait.php
 www/pherb/libraries/Enchilada/SQL/MigrationRunner.class.php
 www/pherb/libraries/EnchiladaHTTP/EnchiladaHTTP.class.php
+www/pherb/libraries/EnchiladaOTLP/EnchiladaOTLP.class.php
 www/pherb/libraries/EnchiladaREST/EnchiladaREST.class.php
 www/pherb/libraries/EnchiladaREST/EnchiladaRequest.class.php
 www/pherb/libraries/EnchiladaREST/EnchiladaResponse.class.php

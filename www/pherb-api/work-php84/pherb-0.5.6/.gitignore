@@ -1,0 +1,8 @@
+config/settings.ini
+config/local.conf.php
+temp/
+*.log
+.DS_Store
+cmd/pherb-worker/.zig-cache/
+cmd/pherb-worker/zig-out/
+*.core

@@ -1,5 +1,5 @@
 PORTNAME=	pherb-worker
-DISTVERSION=	0.5.5
+DISTVERSION=	0.5.7
 CATEGORIES=	www audio
 MASTER_SITES=	https://github.com/tuaris/pherb/archive/refs/tags/:pherb
 DISTFILES=	v${DISTVERSION}${EXTRACT_SUFX}:pherb

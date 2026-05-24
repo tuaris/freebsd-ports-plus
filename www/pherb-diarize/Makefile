@@ -1,6 +1,6 @@
 PORTNAME=	pherb-diarize
 DISTVERSIONPREFIX=	v
-DISTVERSION=	0.5.5
+DISTVERSION=	0.5.7
 CATEGORIES=	audio python
 
 MAINTAINER=	daniel@morante.net

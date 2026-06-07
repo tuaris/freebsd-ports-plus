@@ -12,6 +12,9 @@ WWW=		https://github.com/grafana/loki
 LICENSE=	AGPLv3
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
+NOT_FOR_ARCHS=		i386
+NOT_FOR_ARCHS_REASON=	modernc.org/libc has size_t/uint64 type mismatches on 32-bit
+
 USES=		go:modules cpe
 CPE_VENDOR=	grafana
 USE_GITHUB=	yes

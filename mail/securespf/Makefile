@@ -11,7 +11,9 @@ WWW=		https://pacyworld.dev/securemessage/securespf
 LICENSE=	BSD2CLAUSE
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-USES=		zig:015
+LIB_DEPENDS=	libzmq.so:net/libzmq4
+
+USES=		pkgconfig ssl zig:015
 
 USE_RC_SUBR=	securespf
 

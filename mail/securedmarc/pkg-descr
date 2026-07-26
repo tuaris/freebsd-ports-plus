@@ -1,0 +1,9 @@
+SecureDMARC is a high-performance DMARC policy evaluation milter (RFC 7489)
+written in Zig with a thread-per-core architecture using kqueue.
+
+It reads upstream SPF and DKIM Authentication-Results headers, fetches the
+sender domain's _dmarc. TXT record, evaluates identifier alignment (strict
+or relaxed mode), and adds its own Authentication-Results header with the
+DMARC verdict (pass/fail/none/temperror/permerror).
+
+Must run after SecureSPF and SecureDKIM in the Postfix milter chain.

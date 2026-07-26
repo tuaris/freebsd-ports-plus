@@ -1,4 +1,4 @@
-PORTNAME=	securespf
+PORTNAME=	securedmarc
 DISTVERSIONPREFIX=	v
 DISTVERSION=	0.1.0
 CATEGORIES=	mail
@@ -6,8 +6,8 @@ MASTER_SITES=	https://pacyworld.dev/securemessage/${PORTNAME}/archive/${DISTVERS
 DISTFILES=	${DISTNAME}${EXTRACT_SUFX}
 
 MAINTAINER=	daniel@morante.net
-COMMENT=	RFC 7208 SPF verification milter (high-performance Zig implementation)
-WWW=		https://pacyworld.dev/securemessage/securespf
+COMMENT=	RFC 7489 DMARC policy evaluation milter (high-performance Zig implementation)
+WWW=		https://pacyworld.dev/securemessage/securedmarc
 
 LICENSE=	BSD2CLAUSE
 LICENSE_FILE=	${WRKSRC}/LICENSE
@@ -17,17 +17,17 @@ USES=		zig:015
 post-extract:
 	@${MV} ${WRKDIR}/${PORTNAME} ${WRKSRC}
 
-USE_RC_SUBR=	securespf
+USE_RC_SUBR=	securedmarc
 
-USERS=		_spf
-GROUPS=		_spf
+USERS=		_dmarc
+GROUPS=		_dmarc
 
-PLIST_FILES=	bin/securespf \
-		"@sample ${ETCDIR}/securespf.conf.sample"
+PLIST_FILES=	bin/securedmarc \
+		"@sample ${ETCDIR}/securedmarc.conf.sample"
 
 post-install:
 	@${MKDIR} ${STAGEDIR}${ETCDIR}
-	${INSTALL_DATA} ${WRKSRC}/config/securespf.conf.sample \
-		${STAGEDIR}${ETCDIR}/securespf.conf.sample
+	${INSTALL_DATA} ${WRKSRC}/config/securedmarc.conf.sample \
+		${STAGEDIR}${ETCDIR}/securedmarc.conf.sample
 
 .include <bsd.port.mk>

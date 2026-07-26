@@ -5,3 +5,4 @@ rauthy:*:804:804::0:0:Rauthy IdP Daemon:/var/db/rauthy:/usr/sbin/nologin
 _spf:*:805:805::0:0:SecureSPF Milter:/nonexistent:/usr/sbin/nologin
 _dkim:*:806:806::0:0:SecureDKIM Milter:/nonexistent:/usr/sbin/nologin
 _dmarc:*:810:810::0:0:SecureDMARC Milter:/nonexistent:/usr/sbin/nologin
+_arc:*:811:811::0:0:SecureARC Milter:/nonexistent:/usr/sbin/nologin

@@ -1,0 +1,11 @@
+SecureARC is a high-performance ARC (Authenticated Received Chain) milter
+implementing RFC 8617. It validates existing ARC chains on inbound mail and
+seals messages with new ARC sets for forwarding.
+
+Features:
+- ARC chain validation (ARC-Authentication-Results, ARC-Message-Signature,
+  ARC-Seal) with full cryptographic verification
+- ARC sealing with RSA-SHA256 signing
+- Thread-per-core architecture with kqueue I/O multiplexing
+- ZMQ event publishing for monitoring and reporting
+- Multi-listener support (verify/seal/both modes per listener)

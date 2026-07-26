@@ -25,6 +25,7 @@ USERS=		_spf
 GROUPS=		_spf
 
 PLIST_FILES=	bin/securespf \
+		bin/securespf-check \
 		"@sample ${ETCDIR}/securespf.conf.sample"
 
 post-install:

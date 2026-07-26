@@ -1,5 +1,5 @@
-TIMESTAMP = 1785050967
+TIMESTAMP = 1785099484
 SHA256 (zig/securedmarc-v0.1.0.tar.gz) = 828f0c97071960df3116324691d738c0c7bbf91bef774f4464c9e194f93a5091
 SIZE (zig/securedmarc-v0.1.0.tar.gz) = 9852
-SHA256 (zig/securemilter-lib-0.1.0.tar.gz) = aecc1f16741754a772ea8783361d1aa925bfab378e99ea2664f3db40c8db2973
-SIZE (zig/securemilter-lib-0.1.0.tar.gz) = 30722
+SHA256 (zig/securemilter-lib-0.3.0.tar.gz) = 3d0626b68e2d9c08ba8fb5607b8908aa22b5e49e0c5dd6e4c4ad765819cebac8
+SIZE (zig/securemilter-lib-0.3.0.tar.gz) = 28514

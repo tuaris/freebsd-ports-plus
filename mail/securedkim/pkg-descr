@@ -1,0 +1,13 @@
+SecureDKIM is a high-performance RFC 6376 DKIM signing and verification
+milter written in Zig. It integrates with Postfix via the milter protocol
+(v6) to sign outbound mail and verify inbound DKIM signatures.
+
+Features:
+- DKIM signing (RSA-SHA256, Ed25519-SHA256)
+- DKIM verification with DNS public key lookup
+- Header and body canonicalization (simple, relaxed)
+- SigningTable/KeyTable for multi-domain support
+- Single-domain shorthand config for simple deployments
+- Sign/verify/both modes per listener
+- Thread-per-core worker pool with kqueue I/O multiplexing
+- Authentication-Results header generation (RFC 8601)

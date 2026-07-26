@@ -1,0 +1,32 @@
+#!/bin/sh
+
+# PROVIDE: securespf
+# REQUIRE: LOGIN dns
+# KEYWORD: shutdown
+
+. /etc/rc.subr
+
+name="securespf"
+rcvar="${name}_enable"
+desc="SecureSPF milter daemon (RFC 7208 SPF verification)"
+
+load_rc_config $name
+
+: ${securespf_enable:="NO"}
+: ${securespf_config:="%%PREFIX%%/etc/securespf/securespf.conf"}
+: ${securespf_pidfile:="/var/run/securespf/securespf.pid"}
+: ${securespf_logfile:="/var/log/securespf.log"}
+
+pidfile="${securespf_pidfile}"
+procname="%%PREFIX%%/bin/securespf"
+command="/usr/sbin/daemon"
+command_args="-f -p ${pidfile} -t ${name} -o ${securespf_logfile} ${procname} ${securespf_config}"
+
+start_precmd="${name}_prestart"
+
+securespf_prestart()
+{
+	install -d -o _spf -g _spf -m 0755 /var/run/securespf
+}
+
+run_rc_command "$1"

@@ -1,0 +1,14 @@
+SecureSPF is a high-performance RFC 7208 SPF (Sender Policy Framework)
+verification milter written in Zig. It integrates with Postfix via the
+milter protocol (v6) to add Authentication-Results headers indicating
+SPF pass/fail/temperror/permerror status.
+
+Features:
+- All 8 SPF mechanisms (all, ip4, ip6, a, mx, include, exists, ptr)
+- RFC 7208 macro expansion (%{s/l/o/d/i/p/h/c/r/t/v})
+- 10-DNS-lookup limit enforcement
+- redirect modifier support
+- IPv4 and IPv6 CIDR matching
+- Trusted hosts whitelist
+- Thread-per-core worker pool with kqueue I/O multiplexing
+- INI-style configuration

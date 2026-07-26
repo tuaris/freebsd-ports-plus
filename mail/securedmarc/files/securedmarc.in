@@ -15,12 +15,10 @@ load_rc_config $name
 : ${securedmarc_enable:="NO"}
 : ${securedmarc_config:="%%PREFIX%%/etc/securedmarc/securedmarc.conf"}
 : ${securedmarc_pidfile:="/var/run/securedmarc/securedmarc.pid"}
-: ${securedmarc_logfile:="/var/log/securedmarc.log"}
 
 pidfile="${securedmarc_pidfile}"
-procname="%%PREFIX%%/bin/securedmarc"
-command="/usr/sbin/daemon"
-command_args="-f -p ${pidfile} -t ${name} -o ${securedmarc_logfile} ${procname} ${securedmarc_config}"
+command="%%PREFIX%%/bin/securedmarc"
+command_args="${securedmarc_config}"
 
 start_precmd="${name}_prestart"
 

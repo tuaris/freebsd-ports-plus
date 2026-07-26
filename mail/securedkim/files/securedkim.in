@@ -15,12 +15,10 @@ load_rc_config $name
 : ${securedkim_enable:="NO"}
 : ${securedkim_config:="%%PREFIX%%/etc/securedkim/securedkim.conf"}
 : ${securedkim_pidfile:="/var/run/securedkim/securedkim.pid"}
-: ${securedkim_logfile:="/var/log/securedkim.log"}
 
 pidfile="${securedkim_pidfile}"
-procname="%%PREFIX%%/bin/securedkim"
-command="/usr/sbin/daemon"
-command_args="-f -p ${pidfile} -t ${name} -o ${securedkim_logfile} ${procname} ${securedkim_config}"
+command="%%PREFIX%%/bin/securedkim"
+command_args="${securedkim_config}"
 
 start_precmd="${name}_prestart"
 

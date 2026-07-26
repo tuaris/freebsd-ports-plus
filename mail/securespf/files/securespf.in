@@ -15,12 +15,10 @@ load_rc_config $name
 : ${securespf_enable:="NO"}
 : ${securespf_config:="%%PREFIX%%/etc/securespf/securespf.conf"}
 : ${securespf_pidfile:="/var/run/securespf/securespf.pid"}
-: ${securespf_logfile:="/var/log/securespf.log"}
 
 pidfile="${securespf_pidfile}"
-procname="%%PREFIX%%/bin/securespf"
-command="/usr/sbin/daemon"
-command_args="-f -p ${pidfile} -t ${name} -o ${securespf_logfile} ${procname} ${securespf_config}"
+command="%%PREFIX%%/bin/securespf"
+command_args="${securespf_config}"
 
 start_precmd="${name}_prestart"
 

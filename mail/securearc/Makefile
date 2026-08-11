@@ -1,6 +1,7 @@
 PORTNAME=	securearc
 DISTVERSIONPREFIX=	v
 DISTVERSION=	0.6.2
+PORTREVISION=	1
 CATEGORIES=	mail
 
 USE_GITHUB=	yes
@@ -29,7 +30,9 @@ PLIST_FILES=	bin/securearc \
 		share/man/man8/securearc-check.8.gz \
 		share/man/man8/securearc-seal.8.gz \
 		share/man/man8/securearc-testkey.8.gz \
-		"@sample ${ETCDIR}/securearc.conf.sample"
+		"@sample ${ETCDIR}/securearc.conf.sample" \
+		"@dir(mailnull,mail,0750) /var/db/securearc/keys" \
+		"@dir(mailnull,mail,0750) /var/db/securearc"
 
 post-install:
 	@${MKDIR} ${STAGEDIR}${ETCDIR}
@@ -39,5 +42,6 @@ post-install:
 	${INSTALL_MAN} ${WRKSRC}/man/securearc.8 ${WRKSRC}/man/securearc-check.8 \
 		${WRKSRC}/man/securearc-seal.8 ${WRKSRC}/man/securearc-testkey.8 \
 		${STAGEDIR}${PREFIX}/share/man/man8/
+	@${MKDIR} ${STAGEDIR}/var/db/securearc/keys
 
 .include <bsd.port.mk>

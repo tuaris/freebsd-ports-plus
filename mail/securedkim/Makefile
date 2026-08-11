@@ -1,6 +1,7 @@
 PORTNAME=	securedkim
 DISTVERSIONPREFIX=	v
 DISTVERSION=	0.6.2
+PORTREVISION=	1
 CATEGORIES=	mail
 
 USE_GITHUB=	yes
@@ -31,7 +32,9 @@ PLIST_FILES=	bin/securedkim \
 		share/man/man8/securedkim-genkey.8.gz \
 		share/man/man8/securedkim-sign.8.gz \
 		share/man/man8/securedkim-testkey.8.gz \
-		"@sample ${ETCDIR}/securedkim.conf.sample"
+		"@sample ${ETCDIR}/securedkim.conf.sample" \
+		"@dir(mailnull,mail,0750) /var/db/securedkim/keys" \
+		"@dir(mailnull,mail,0750) /var/db/securedkim"
 
 post-install:
 	@${MKDIR} ${STAGEDIR}${ETCDIR}
@@ -42,5 +45,6 @@ post-install:
 		${WRKSRC}/man/securedkim-genkey.8 ${WRKSRC}/man/securedkim-sign.8 \
 		${WRKSRC}/man/securedkim-testkey.8 \
 		${STAGEDIR}${PREFIX}/share/man/man8/
+	@${MKDIR} ${STAGEDIR}/var/db/securedkim/keys
 
 .include <bsd.port.mk>

@@ -2,8 +2,9 @@ PORTNAME=	securearc
 DISTVERSIONPREFIX=	v
 DISTVERSION=	0.6.2
 CATEGORIES=	mail
-MASTER_SITES=	https://pacyworld.dev/securemessage/${PORTNAME}/archive/${DISTVERSIONFULL}${EXTRACT_SUFX}?dummy=/
-DISTFILES=	${DISTNAME}${EXTRACT_SUFX}
+
+USE_GITHUB=	yes
+GH_ACCOUNT=	securemessage
 
 MAINTAINER=	daniel@morante.net
 COMMENT=	RFC 8617 ARC chain validation and sealing milter (Zig implementation)
@@ -15,11 +16,8 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 LIB_DEPENDS=	libzmq.so:net/libzmq4
 
 USES=		pkgconfig ssl zig:015
-ZIG_TUPLE=	securemilter:pacyworld.dev/securemessage/securemilter-lib/archive/v0.5.0.tar.gz?dummy=/securemilter-lib-0.5.0.tar.gz:securemilter_lib-0.5.0-IbMuLIdYBgDkEFPMw0Ljic0E72eVSanLG-bqI8_jk4tQ \
-		securemilter_crypto:pacyworld.dev/securemessage/securemilter-crypto/archive/v0.2.0.tar.gz?dummy=/securemilter-crypto-0.2.0.tar.gz:securemilter_crypto-0.2.0-R5f4teC4AQDi_T_GQlhZBgbefsXXBUrgVhe7i0pANT-4
-
-post-extract:
-	@${MV} ${WRKDIR}/${PORTNAME} ${WRKSRC}
+ZIG_TUPLE=	securemilter:github.com/securemessage/securemilter-lib/archive/refs/tags/v0.5.0.tar.gz?dummy=/securemilter-lib-0.5.0.tar.gz:securemilter_lib-0.5.0-IbMuLIdYBgDkEFPMw0Ljic0E72eVSanLG-bqI8_jk4tQ \
+		securemilter_crypto:github.com/securemessage/securemilter-crypto/archive/refs/tags/v0.2.0.tar.gz?dummy=/securemilter-crypto-0.2.0.tar.gz:securemilter_crypto-0.2.0-R5f4teC4AQDi_T_GQlhZBgbefsXXBUrgVhe7i0pANT-4
 
 USE_RC_SUBR=	securearc
 

@@ -1,7 +1,7 @@
-TIMESTAMP = 1786424090
-SHA256 (zig/securearc-v0.6.2.tar.gz) = 5db3bea1b1d2acbaab65706d8e93f4fb7bd53ce657d6b8ac5921f260f131fe5e
-SIZE (zig/securearc-v0.6.2.tar.gz) = 91054
+TIMESTAMP = 1786431297
 SHA256 (zig/securemilter-lib-0.5.0.tar.gz) = 1de65e59ffe3576bb65980065c8dec13e60895055e8b518a7f4b9948dde44917
 SIZE (zig/securemilter-lib-0.5.0.tar.gz) = 136492
 SHA256 (zig/securemilter-crypto-0.2.0.tar.gz) = 8d6f497a2f24e53399bd12b06c256f61998e5bdbd0231846b5c8332ec9d37862
 SIZE (zig/securemilter-crypto-0.2.0.tar.gz) = 37099
+SHA256 (zig/securemessage-securearc-v0.6.2_GH0.tar.gz) = 7930615a8b9095b3923927dd5348208c9d840145f1dca1bb742cd5675a4fc656
+SIZE (zig/securemessage-securearc-v0.6.2_GH0.tar.gz) = 90966

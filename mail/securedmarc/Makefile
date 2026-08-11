@@ -2,8 +2,9 @@ PORTNAME=	securedmarc
 DISTVERSIONPREFIX=	v
 DISTVERSION=	0.6.2
 CATEGORIES=	mail
-MASTER_SITES=	https://pacyworld.dev/securemessage/${PORTNAME}/archive/${DISTVERSIONFULL}${EXTRACT_SUFX}?dummy=/
-DISTFILES=	${DISTNAME}${EXTRACT_SUFX}
+
+USE_GITHUB=	yes
+GH_ACCOUNT=	securemessage
 
 MAINTAINER=	daniel@morante.net
 COMMENT=	RFC 7489 DMARC policy evaluation milter (Zig implementation)
@@ -15,10 +16,7 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 LIB_DEPENDS=	libzmq.so:net/libzmq4
 
 USES=		pkgconfig zig:015
-ZIG_TUPLE=	securemilter:pacyworld.dev/securemessage/securemilter-lib/archive/v0.5.0.tar.gz?dummy=/securemilter-lib-0.5.0.tar.gz:securemilter_lib-0.5.0-IbMuLIdYBgDkEFPMw0Ljic0E72eVSanLG-bqI8_jk4tQ
-
-post-extract:
-	@${MV} ${WRKDIR}/${PORTNAME} ${WRKSRC}
+ZIG_TUPLE=	securemilter:github.com/securemessage/securemilter-lib/archive/refs/tags/v0.5.0.tar.gz?dummy=/securemilter-lib-0.5.0.tar.gz:securemilter_lib-0.5.0-IbMuLIdYBgDkEFPMw0Ljic0E72eVSanLG-bqI8_jk4tQ
 
 USE_RC_SUBR=	securedmarc
 

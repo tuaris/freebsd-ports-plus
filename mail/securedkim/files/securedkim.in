@@ -18,13 +18,6 @@ load_rc_config $name
 
 pidfile="${securedkim_pidfile}"
 command="%%PREFIX%%/bin/securedkim"
-command_args="${securedkim_config}"
-
-start_precmd="${name}_prestart"
-
-securedkim_prestart()
-{
-	install -d -o _dkim -g _dkim -m 0755 /var/run/securedkim
-}
+command_args="-c ${securedkim_config}"
 
 run_rc_command "$1"

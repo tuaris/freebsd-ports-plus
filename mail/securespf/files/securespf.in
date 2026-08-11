@@ -18,13 +18,6 @@ load_rc_config $name
 
 pidfile="${securespf_pidfile}"
 command="%%PREFIX%%/bin/securespf"
-command_args="${securespf_config}"
-
-start_precmd="${name}_prestart"
-
-securespf_prestart()
-{
-	install -d -o _spf -g _spf -m 0755 /var/run/securespf
-}
+command_args="-c ${securespf_config}"
 
 run_rc_command "$1"

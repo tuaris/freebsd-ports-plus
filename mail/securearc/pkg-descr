@@ -1,11 +1,13 @@
-SecureARC is a high-performance ARC (Authenticated Received Chain) milter
-implementing RFC 8617. It validates existing ARC chains on inbound mail and
-seals messages with new ARC sets for forwarding.
+SecureARC is a high-performance RFC 8617 ARC (Authenticated Received Chain)
+milter written in Zig. It integrates with Postfix via the milter protocol
+(v6) to validate ARC chains on inbound mail and seal outbound/forwarded
+mail with new ARC sets, preserving authentication results across
+forwarding hops.
 
 Features:
-- ARC chain validation (ARC-Authentication-Results, ARC-Message-Signature,
-  ARC-Seal) with full cryptographic verification
-- ARC sealing with RSA-SHA256 signing
-- Thread-per-core architecture with kqueue I/O multiplexing
-- ZMQ event publishing for monitoring and reporting
-- Multi-listener support (verify/seal/both modes per listener)
+- ARC chain validation (ARC-Message-Signature and ARC-Seal)
+- ARC sealing for forwarded messages (AAR + AMS + AS)
+- RSA-SHA256 and Ed25519-SHA256 algorithm support
+- Separate verify/seal/both modes per listener
+- Thread-per-core worker pool with kqueue I/O multiplexing
+- Authentication-Results header generation (RFC 8601)

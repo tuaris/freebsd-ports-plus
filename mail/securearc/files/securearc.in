@@ -18,13 +18,6 @@ load_rc_config $name
 
 pidfile="${securearc_pidfile}"
 command="%%PREFIX%%/bin/securearc"
-command_args="${securearc_config}"
-
-start_precmd="${name}_prestart"
-
-securearc_prestart()
-{
-	install -d -o _arc -g _arc -m 0755 /var/run/securearc
-}
+command_args="-c ${securearc_config}"
 
 run_rc_command "$1"

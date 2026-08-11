@@ -18,13 +18,6 @@ load_rc_config $name
 
 pidfile="${securedmarc_pidfile}"
 command="%%PREFIX%%/bin/securedmarc"
-command_args="${securedmarc_config}"
-
-start_precmd="${name}_prestart"
-
-securedmarc_prestart()
-{
-	install -d -o _dmarc -g _dmarc -m 0755 /var/run/securedmarc
-}
+command_args="-c ${securedmarc_config}"
 
 run_rc_command "$1"

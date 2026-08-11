@@ -1,2 +1,0 @@
-ZIG_TUPLE=	securemilter:pacyworld.dev/securemessage/securemilter-lib/archive/v0.3.0.tar.gz?dummy=/securemilter-lib-0.3.0.tar.gz:securemilter_lib-0.3.0-IbMuLD_GAQDiYjbvezjXRPXBsIHgc3VlerPOi6wKVW5C
-ZIG_TUPLE+=	securemilter_crypto:pacyworld.dev/securemessage/securemilter-crypto/archive/v0.1.0.tar.gz?dummy=/securemilter-crypto-0.1.0.tar.gz:securemilter_crypto-0.1.0-R5f4tbViAAB-nKG29b2ukzWATybSgPoa93r_aSu60d7o

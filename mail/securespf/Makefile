@@ -1,6 +1,6 @@
 PORTNAME=	securespf
 DISTVERSIONPREFIX=	v
-DISTVERSION=	0.6.2
+DISTVERSION=	0.6.3
 CATEGORIES=	mail
 
 USE_GITHUB=	yes
@@ -16,7 +16,7 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 LIB_DEPENDS=	libzmq.so:net/libzmq4
 
 USES=		pkgconfig zig:015
-ZIG_TUPLE=	securemilter:github.com/securemessage/securemilter-lib/archive/refs/tags/v0.5.0.tar.gz?dummy=/securemilter-lib-0.5.0.tar.gz:securemilter_lib-0.5.0-IbMuLIdYBgDkEFPMw0Ljic0E72eVSanLG-bqI8_jk4tQ
+ZIG_TUPLE=	securemilter:github.com/securemessage/securemilter-lib/archive/refs/tags/v0.5.2.tar.gz?dummy=/securemilter-lib-0.5.2.tar.gz:securemilter_lib-0.5.2-IbMuLHfwBgCFwOeUeAIJ8q2Diw2FJ9T-tlxe3wjIstgI
 
 USE_RC_SUBR=	securespf
 

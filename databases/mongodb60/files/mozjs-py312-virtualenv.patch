@@ -1,0 +1,21 @@
+--- python/mozbuild/mozbuild/virtualenv.py.orig
++++ python/mozbuild/mozbuild/virtualenv.py
+@@ -106,9 +106,8 @@
+     @property
+     def virtualenv_script_path(self):
+         """Path to virtualenv's own populator script."""
+-        return os.path.join(
+-            self.topsrcdir, "third_party", "python", "virtualenv", "virtualenv.py"
+-        )
++        # Use the system virtualenv; the bundled copy predates Python 3.12.
++        return "%%LOCALBASE%%/bin/virtualenv"
+ 
+     def version_info(self):
+         return eval(
+@@ -254,6 +253,7 @@
+             # setuptools, or wheel. This is bad for security, reproducibility,
+             # and speed.
+             "--no-download",
++            "--system-site-packages",
+             self.virtualenv_root,
+         ]

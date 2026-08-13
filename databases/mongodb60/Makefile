@@ -29,7 +29,10 @@ BUILD_DEPENDS=	${PY_SETUPTOOLS} \
 		${PYTHON_PKGNAMEPREFIX}pyyaml>=3.11:devel/py-pyyaml@${PY_FLAVOR}
 # build depends used while running ${WRKSRC}/src/third_party/mozjs/gen-config.sh
 BUILD_DEPENDS+=	autoconf2.13:devel/autoconf2.13 \
-		gsed:textproc/gsed
+		gsed:textproc/gsed \
+		${PYTHON_PKGNAMEPREFIX}looseversion>0:devel/py-looseversion@${PY_FLAVOR} \
+		${PYTHON_PKGNAMEPREFIX}six>0:devel/py-six@${PY_FLAVOR} \
+		${PYTHON_PKGNAMEPREFIX}virtualenv>0:devel/py-virtualenv@${PY_FLAVOR}
 LIB_DEPENDS=	libcurl.so:ftp/curl \
 		libicuuc.so:devel/icu \
 		libpcre.so:devel/pcre \
@@ -131,6 +134,13 @@ post-patch:
 	${REINPLACE_CMD} -e 's#rU#r#g' ${WRKDIR}/spidermonkey-${MOZJS_TAG}/python/mozbuild/mozbuild/preprocessor.py
 	${REINPLACE_CMD} -e 's#rU#r#g' ${WRKDIR}/spidermonkey-${MOZJS_TAG}/python/mozbuild/mozbuild/backend/base.py
 	${REINPLACE_CMD} -e 's#rU#r#g' ${WRKDIR}/spidermonkey-${MOZJS_TAG}/python/mozbuild/mozbuild/action/process_define_files.py
+# fix build with python-3.12 (distutils removed, bundled six/virtualenv too old)
+	${RM} ${WRKDIR}/spidermonkey-${MOZJS_TAG}/third_party/python/six/six.py
+	${REINPLACE_CMD} -e 's#from distutils.version import LooseVersion#from looseversion import LooseVersion#' ${WRKDIR}/spidermonkey-${MOZJS_TAG}/python/mozbuild/mozbuild/configure/util.py
+	${REINPLACE_CMD} -e 's#from distutils.version import StrictVersion#from looseversion import LooseVersion as StrictVersion#' ${WRKDIR}/spidermonkey-${MOZJS_TAG}/python/mozbuild/mozbuild/pythonutil.py
+	${REINPLACE_CMD} -e 's#@imports("distutils.sysconfig")#@imports("sysconfig")#' -e "s#distutils.sysconfig.get_python_lib()#sysconfig.get_path('platlib')#" -e 's#if version < (3, 6, 0):#if tuple(version) < (3, 6, 0):#' ${WRKDIR}/spidermonkey-${MOZJS_TAG}/build/moz.configure/init.configure
+	${PATCH} -d ${WRKDIR}/spidermonkey-${MOZJS_TAG} --quiet -p0 -V none < ${FILESDIR}/mozjs-py312-virtualenv.patch
+	${REINPLACE_CMD} -e 's#%%LOCALBASE%%#${LOCALBASE}#' ${WRKDIR}/spidermonkey-${MOZJS_TAG}/python/mozbuild/mozbuild/virtualenv.py
 	${PATCH} -d ${WRKSRC}/src/third_party/mozjs/extract --quiet -p1 -V none < ${DISTDIR}/223087fdc29f18678f6174e9807b8780e439acf6
 
 do-configure:

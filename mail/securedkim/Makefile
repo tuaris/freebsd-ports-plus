@@ -1,6 +1,6 @@
 PORTNAME=	securedkim
 DISTVERSIONPREFIX=	v
-DISTVERSION=	0.6.4
+DISTVERSION=	0.6.7
 CATEGORIES=	mail
 
 USE_GITHUB=	yes
@@ -16,8 +16,8 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 LIB_DEPENDS=	libzmq.so:net/libzmq4
 
 USES=		pkgconfig ssl zig:015
-ZIG_TUPLE=	securemilter:github.com/securemessage/securemilter-lib/archive/refs/tags/v0.5.2.tar.gz?dummy=/securemilter-lib-0.5.2.tar.gz:securemilter_lib-0.5.2-IbMuLHfwBgCFwOeUeAIJ8q2Diw2FJ9T-tlxe3wjIstgI \
-		securemilter_crypto:github.com/securemessage/securemilter-crypto/archive/refs/tags/v0.2.0.tar.gz?dummy=/securemilter-crypto-0.2.0.tar.gz:securemilter_crypto-0.2.0-R5f4teC4AQDi_T_GQlhZBgbefsXXBUrgVhe7i0pANT-4
+ZIG_TUPLE=	securemilter:github.com/securemessage/securemilter-lib/archive/refs/tags/v0.5.7.tar.gz?dummy=/securemilter-lib-0.5.7.tar.gz:securemilter_lib-0.5.7-IbMuLDFDBwARObjKmzjja8sDCDOu0McOaCv5zwxL7j1- \
+		securemilter_crypto:github.com/securemessage/securemilter-crypto/archive/refs/tags/v0.2.1.tar.gz?dummy=/securemilter-crypto-0.2.1.tar.gz:securemilter_crypto-0.2.1-R5f4tY--AQD6pZz1ZXfRpnsMIzZTxt6Hi7Vk6OEm12Fk
 
 USE_RC_SUBR=	securedkim
 

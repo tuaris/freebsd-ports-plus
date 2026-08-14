@@ -1,5 +1,5 @@
-TIMESTAMP = 1786611672
-SHA256 (zig/securemilter-lib-0.5.7.tar.gz) = 1de3546505d1feb16430b770c6656fc25d7346d44be05be6274fdeae6bbe8769
-SIZE (zig/securemilter-lib-0.5.7.tar.gz) = 152435
-SHA256 (zig/securemessage-securespf-v0.6.6_GH0.tar.gz) = 132e323edb4d5aa0baeeeec3da01559383efc63afdd5e8a248483f20567029dd
-SIZE (zig/securemessage-securespf-v0.6.6_GH0.tar.gz) = 56446
+TIMESTAMP = 1786735361
+SHA256 (zig/securemilter-lib-0.5.8.tar.gz) = 93c2f5272d20db08c48c46fa9081def59b13223c0d076264c0dfd2a9dc496eaa
+SIZE (zig/securemilter-lib-0.5.8.tar.gz) = 161548
+SHA256 (zig/securemessage-securespf-v0.6.7_GH0.tar.gz) = 174fc2b3ed872cd144cf23c8f0a894ec2a68d467733d4890cbd523d074f6d8de
+SIZE (zig/securemessage-securespf-v0.6.7_GH0.tar.gz) = 56880

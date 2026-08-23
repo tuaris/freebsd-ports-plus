@@ -1,0 +1,16 @@
+mac_do_auto is a FreeBSD MAC policy kernel module that transparently
+grants privileges to processes whose credentials include membership in a
+configured group (default: wheel/GID 0), without requiring explicit use
+of mdo(1), sudo(8), or doas(1).
+
+Features:
+  * mac_priv_grant hook with per-jail enable/disable/inherit policy
+  * Privilege scoping by category (system, vfs, net, jail, ...) via
+    sysctl security.mac.autodo.scope
+  * /dev/autodo character device with a ring buffer of audit events
+    (poll/kqueue/ioctl interface)
+  * autodo-eventd companion daemon: UCL configuration, multi-group
+    policy with templates, JSON audit log
+
+The module is configured via the security.mac.autodo.* sysctl tree and
+the daemon via /usr/local/etc/autodo/autodo.conf.

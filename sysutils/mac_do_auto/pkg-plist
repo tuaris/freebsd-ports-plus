@@ -1,0 +1,9 @@
+bin/autodo-eventd
+@sample %%ETCDIR%%/autodo.conf.sample
+%%ETCDIR%%/profiles/all.conf
+%%ETCDIR%%/profiles/developer.conf
+%%ETCDIR%%/profiles/minimal.conf
+%%ETCDIR%%/profiles/server-admin.conf
+share/man/man4/mac_do_auto.4.gz
+share/man/man5/autodo.conf.5.gz
+share/man/man8/autodo-eventd.8.gz

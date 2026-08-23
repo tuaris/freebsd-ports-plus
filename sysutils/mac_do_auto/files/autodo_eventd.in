@@ -1,0 +1,58 @@
+#!/bin/sh
+
+# PROVIDE: autodo_eventd
+# REQUIRE: DAEMON
+# BEFORE: LOGIN
+# KEYWORD: shutdown
+#
+# Add the following lines to /etc/rc.conf to enable autodo_eventd:
+#
+# autodo_eventd_enable (bool):	Set to YES to enable autodo-eventd.
+#				Default: NO
+# autodo_eventd_config (str):	Path to config file.
+#				Default: %%PREFIX%%/etc/autodo/autodo.conf
+# autodo_eventd_logfile (str):	Path to the JSON audit log.
+#				Default: /var/log/autodo/events.json
+# autodo_eventd_output (str):	Path to the daemon's own log output.
+#				Default: /var/log/autodo/eventd.log
+#
+
+. /etc/rc.subr
+
+name="autodo_eventd"
+rcvar="${name}_enable"
+desc="autodo-eventd daemon (mac_do_auto multi-group policy and audit)"
+
+load_rc_config $name
+
+: ${autodo_eventd_enable:="NO"}
+: ${autodo_eventd_config:="%%PREFIX%%/etc/autodo/autodo.conf"}
+: ${autodo_eventd_logfile:="/var/log/autodo/events.json"}
+: ${autodo_eventd_output:="/var/log/autodo/eventd.log"}
+
+procname="%%PREFIX%%/bin/autodo-eventd"
+pidfile="/var/run/${name}.pid"
+command="/usr/sbin/daemon"
+command_args="-f -p ${pidfile} -t ${name} -o ${autodo_eventd_output} ${procname} --config=${autodo_eventd_config} --log=${autodo_eventd_logfile}"
+
+start_precmd="${name}_prestart"
+
+autodo_eventd_prestart()
+{
+	local logdir
+
+	for logdir in $(dirname "${autodo_eventd_logfile}") \
+	    $(dirname "${autodo_eventd_output}"); do
+		[ -d "${logdir}" ] || install -d -m 750 "${logdir}"
+	done
+	if ! kldstat -q -m mac_do_auto; then
+		warn "mac_do_auto kernel module is not loaded"
+		return 1
+	fi
+	if [ ! -c /dev/autodo ]; then
+		warn "/dev/autodo does not exist"
+		return 1
+	fi
+}
+
+run_rc_command "$1"

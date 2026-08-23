@@ -1,0 +1,35 @@
+[
+{ type: install
+  message: <<EOM
+
+To load mac_do_auto at boot, add to /boot/loader.conf:
+
+    mac_do_auto_load="YES"
+
+Or load it now:
+
+    kldload %%KMODDIR%%/mac_do_auto.ko
+
+Once loaded, members of the wheel group receive implicit privileges.
+Adjust the authorized group and scope via sysctl:
+
+    security.mac.autodo.gid=0
+    security.mac.autodo.scope=all
+
+To run the autodo-eventd companion daemon (multi-group policy, path
+deny list, audit log), install the sample configuration and enable the
+service:
+
+    cp %%ETCDIR%%/autodo.conf.sample %%ETCDIR%%/autodo.conf
+    sysrc autodo_eventd_enable=YES
+    service autodo_eventd start
+
+Policy profiles referenced by "profile = " entries in the config are
+installed under %%ETCDIR%%/profiles/.
+
+Note: the kernel module must match the running kernel's MAC framework
+version (FreeBSD 15.x); reinstall the package after an OS upgrade to a
+new major version.
+EOM
+}
+]

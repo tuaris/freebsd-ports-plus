@@ -1,7 +1,7 @@
-TIMESTAMP = 1786735392
+TIMESTAMP = 1787602727
 SHA256 (zig/securemilter-lib-0.5.8.tar.gz) = 93c2f5272d20db08c48c46fa9081def59b13223c0d076264c0dfd2a9dc496eaa
 SIZE (zig/securemilter-lib-0.5.8.tar.gz) = 161548
 SHA256 (zig/securemilter-crypto-0.2.1.tar.gz) = cc85eb84baef4a2b2829b2a837bd1911ee0cb73a5b652e449dcc2942caf55c82
 SIZE (zig/securemilter-crypto-0.2.1.tar.gz) = 37322
-SHA256 (zig/securemessage-securedkim-v0.6.9_GH0.tar.gz) = 222de3f5d3b0f5ff95db17cb1cd678f82d2712963e5a2a1c99e11ab0a19edbab
-SIZE (zig/securemessage-securedkim-v0.6.9_GH0.tar.gz) = 92371
+SHA256 (zig/securemessage-securedkim-v0.7.0_GH0.tar.gz) = de38713e28a86e6ae341e03acd26fe67f665831906c001599d82583346a2b754
+SIZE (zig/securemessage-securedkim-v0.7.0_GH0.tar.gz) = 94622

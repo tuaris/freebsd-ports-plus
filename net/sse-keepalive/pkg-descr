@@ -1,0 +1,14 @@
+sse-keepalive is an HTTP/1.1 reverse proxy that keeps Server-Sent Events
+streams alive across long provider silences, such as the multi-minute prompt
+prefill of llama.cpp on large prompts. Clients with stall watchdogs (Zed,
+ACP agents) otherwise cancel a healthy request.
+
+It relays traffic verbatim and, on streaming completions only, asks the
+provider for native progress, emits a structurally valid empty chunk at
+stream start and again whenever the provider is silent for the configured
+cadence. Clients that opt in via X-Keepalive-Protocol receive labelled
+frames with prefill progress and ETA.
+
+FreeBSD-native: kqueue event loops, one worker process per CPU with a
+thread-per-core option, SO_REUSEPORT_LB accept balancing, accf_data accept
+filters, supervised workers with rolling restart on SIGHUP.

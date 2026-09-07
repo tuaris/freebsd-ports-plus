@@ -6,3 +6,4 @@ _spf:*:805:
 _dkim:*:806:
 _dmarc:*:810:
 _arc:*:811:
+ssekeepalive:*:812:

@@ -1,0 +1,58 @@
+#!/bin/sh
+
+# PROVIDE: sse_keepalive
+# REQUIRE: LOGIN NETWORKING
+# KEYWORD: shutdown
+#
+# Add these lines to /etc/rc.conf.local or /etc/rc.conf
+# to enable this service:
+#
+# sse_keepalive_enable (bool):    Enable sse-keepalive. (default=NO)
+# sse_keepalive_config (str):     Configuration file.
+#                                 (default=%%ETCDIR%%/sse-keepalive.conf)
+# sse_keepalive_user (str):       User to run as (rc.subr su -m). (default=%%USER%%)
+# sse_keepalive_group (str):      Group owning run/log dirs. (default=%%GROUP%%)
+# sse_keepalive_logfile (str):    Log file.
+#                                 (default=/var/log/sse-keepalive/sse-keepalive.log)
+# sse_keepalive_accf (bool):      Load accf_data(9) so the kernel buffers
+#                                 request bodies before accept. (default=YES)
+# sse_keepalive_flags (str):      Extra command line flags. (default empty)
+
+. /etc/rc.subr
+
+name=sse_keepalive
+rcvar=sse_keepalive_enable
+desc="SSE keep-alive shim for streaming LLM providers"
+
+load_rc_config $name
+
+: ${sse_keepalive_enable:="NO"}
+: ${sse_keepalive_config:="%%ETCDIR%%/sse-keepalive.conf"}
+: ${sse_keepalive_user:="%%USER%%"}
+: ${sse_keepalive_group:="%%GROUP%%"}
+: ${sse_keepalive_logfile:="/var/log/sse-keepalive/sse-keepalive.log"}
+: ${sse_keepalive_accf:="YES"}
+
+pidfile="/var/run/${name}/${name}.pid"
+required_files="${sse_keepalive_config}"
+procname="%%PREFIX%%/bin/sse-keepalive"
+command="/usr/sbin/daemon"
+command_args="-f -p ${pidfile} -t ${name} -o ${sse_keepalive_logfile} ${procname} -c ${sse_keepalive_config} ${sse_keepalive_flags}"
+# ${name}_flags were consumed into command_args above; rc.subr would otherwise
+# hand them to daemon(8) instead of the shim.
+sse_keepalive_flags=""
+
+start_precmd="sse_keepalive_precmd"
+
+sse_keepalive_precmd()
+{
+	# rc.subr runs the command as ${sse_keepalive_user} (su -m), so both
+	# directories must be writable by that user.
+	install -d -o ${sse_keepalive_user} -g ${sse_keepalive_group} -m 0750 /var/run/${name}
+	install -d -o ${sse_keepalive_user} -g ${sse_keepalive_group} -m 0750 /var/log/sse-keepalive
+	if checkyesno sse_keepalive_accf; then
+		load_kld accf_data || warn "accf_data not loaded; continuing without an accept filter"
+	fi
+}
+
+run_rc_command "$1"

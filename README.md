@@ -13,6 +13,7 @@ Extra FreeBSD ports not yet available in the official FreeBSD ports tree. Pre-bu
 | `net-p2p/cpuminer-opt` | CPU miner with architecture-specific optimizations |
 | `net/pecl-zmq` | PHP ZMQ extension - ZeroMQ bindings (PHP 8.5 patched) |
 | `net/smoothmq` | SmoothMQ - Drop-in SQS replacement with UI and observability |
+| `net/sse-keepalive` | SSE keep-alive shim for streaming LLM providers (kqueue, multi-process) |
 | `security/openbao-agent` | OpenBao Agent - auto-auth and token sink daemon |
 | `sysutils/terragrunt487` | Terragrunt 0.48.7 - Thin wrapper for Terraform |
 | `www/sunlight` | Sunlight - Certificate Transparency log implementation |

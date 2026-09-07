@@ -6,3 +6,4 @@ _spf:*:805:805::0:0:SecureSPF Milter:/nonexistent:/usr/sbin/nologin
 _dkim:*:806:806::0:0:SecureDKIM Milter:/nonexistent:/usr/sbin/nologin
 _dmarc:*:810:810::0:0:SecureDMARC Milter:/nonexistent:/usr/sbin/nologin
 _arc:*:811:811::0:0:SecureARC Milter:/nonexistent:/usr/sbin/nologin
+ssekeepalive:*:812:812::0:0:SSE Keep-Alive Shim:/nonexistent:/usr/sbin/nologin

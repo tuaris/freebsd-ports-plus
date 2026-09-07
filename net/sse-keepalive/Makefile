@@ -1,5 +1,5 @@
 PORTNAME=	sse-keepalive
-DISTVERSION=	0.1.1
+DISTVERSION=	0.1.2
 CATEGORIES=	net
 MASTER_SITES=	https://git.morante.net/daniel/sse-keepalive/archive/
 DISTNAME=	v${DISTVERSION}

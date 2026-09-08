@@ -1,3 +1,5 @@
-TIMESTAMP = 1788856978
+TIMESTAMP = 1788857630
 SHA256 (mcp-bridge/v0.1.4.tar.gz) = 9121d1b58adcae90196e6dd6150b7465bea8f9d976bfc84803ab196d13cca0eb
 SIZE (mcp-bridge/v0.1.4.tar.gz) = 184706
+SHA256 (mcp-bridge/v0.2.0.tar.gz) = 534a5915d5a6f71ce82518c42b4d23c9a7dd01cce8f1023d3fd28e844e95c578
+SIZE (mcp-bridge/v0.2.0.tar.gz) = 25477

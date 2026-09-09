@@ -1,5 +1,5 @@
 PORTNAME=	mcp-bridge
-DISTVERSION=	0.1.4
+DISTVERSION=	0.1.5
 CATEGORIES=	net
 MASTER_SITES=	https://pacyworld.dev/buenapp/mcp-bridge/archive/
 DISTNAME=	v${DISTVERSION}

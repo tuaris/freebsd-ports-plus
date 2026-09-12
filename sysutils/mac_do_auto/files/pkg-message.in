@@ -32,4 +32,36 @@ version (FreeBSD 15.x); reinstall the package after an OS upgrade to a
 new major version.
 EOM
 }
+{ type: upgrade
+  maximum_version: "0.3.3"
+  message: <<EOM
+
+This version needs a module reload, not just a package upgrade.
+
+autodo-eventd now reads the module's ABI version at startup and exits if
+it disagrees, instead of running on against a kernel it cannot
+configure.  The module resident in the kernel predates that check, so
+the daemon will refuse to start until it is reloaded:
+
+    service autodo_eventd stop
+    kldunload mac_do_auto
+    kldload mac_do_auto
+    service autodo_eventd start
+
+Check the loaded module at any time with:
+
+    autodo-eventd --check-abi
+
+Scope categories now cover every priv(9) constant, which widens what the
+named categories grant:
+
+    vfs     also covers UFS, ZFS and NFS administration
+    dev     also covers the tty privileges
+    system  also covers firmware loading and kenv
+    proc    also covers PRIV_SYSCTL_MEMLOCK
+
+Review the categories named in autodo.conf if you rely on them; scope
+"all" is unchanged.
+EOM
+}
 ]

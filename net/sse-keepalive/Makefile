@@ -1,5 +1,5 @@
 PORTNAME=	sse-keepalive
-DISTVERSION=	0.2.0
+DISTVERSION=	0.3.0
 CATEGORIES=	net
 MASTER_SITES=	https://git.morante.net/daniel/sse-keepalive/archive/
 DISTNAME=	v${DISTVERSION}
@@ -17,6 +17,7 @@ ONLY_FOR_ARCHS_REASON=	uses kqueue/SO_REUSEPORT_LB and is only built for these t
 
 BUILD_DEPENDS=	zig:lang/zig015
 
+USES=		ssl
 USE_RC_SUBR=	sse_keepalive
 
 MAKE_ENV+=	ZIG_GLOBAL_CACHE_DIR=${WRKDIR}/.zig-cache \
@@ -41,7 +42,8 @@ PLIST_FILES=	bin/sse-keepalive \
 
 do-build:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} zig build install responder \
-		-Dtarget=${ZIG_TARGET} -Doptimize=ReleaseSafe -Dcpu=${ZIG_CPU}
+		-Dtarget=${ZIG_TARGET} -Doptimize=ReleaseSafe -Dcpu=${ZIG_CPU} \
+		-Dopenssl-prefix=${OPENSSLBASE}
 
 do-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/zig-out/bin/sse-keepalive ${STAGEDIR}${PREFIX}/bin/sse-keepalive

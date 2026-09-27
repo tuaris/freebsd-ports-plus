@@ -28,8 +28,10 @@
 # openbao_agent_syslog_output_facility (str):	Set syslog facility if syslog enabled.
 #						Default is "daemon". See daemon(8).
 #
-# daemon(8) supervises the agent and restarts it 5s after it exits. The
-# pidfile holds the supervisor's pid, so stop ends the agent without a respawn.
+# rc.subr runs daemon(8) as openbao_agent_user (su -m), so the supervisor and
+# the agent both run as that user. daemon(8) restarts the agent 5s after it
+# exits; the pidfile holds the supervisor's pid, so stop ends the agent
+# without a respawn.
 
 . /etc/rc.subr
 
@@ -70,7 +72,7 @@ fi
 
 pidfile="/var/run/bao/${name}.pid"
 command="/usr/sbin/daemon"
-command_args="-f -R 5 -H -t ${name} ${openbao_agent_syslog_output_flags} -P ${pidfile} -u ${openbao_agent_user} -o ${openbao_agent_logfile} %%PREFIX%%/bin/bao agent -config=${openbao_agent_config}"
+command_args="-f -R 5 -H -t ${name} ${openbao_agent_syslog_output_flags} -P ${pidfile} -o ${openbao_agent_logfile} %%PREFIX%%/bin/bao agent -config=${openbao_agent_config}"
 
 start_precmd=openbao_agent_startprecmd
 required_files="${openbao_agent_config}"

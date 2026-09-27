@@ -1,6 +1,5 @@
 PORTNAME=	openbao-agent
-DISTVERSION=	2.4.1
-PORTREVISION=	1
+DISTVERSION=	2.6.2
 CATEGORIES=	security
 
 MAINTAINER=	jake@metalrip.com
@@ -9,7 +8,7 @@ WWW=		https://openbao.org/docs/agent-and-proxy/agent/
 
 LICENSE=	MPL20
 
-RUN_DEPENDS=	bao:security/openbao
+RUN_DEPENDS=	openbao>=${DISTVERSION}:security/openbao
 
 USES=		metaport
 

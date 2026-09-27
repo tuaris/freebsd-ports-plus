@@ -31,7 +31,7 @@ A sample Monit configuration is installed at:
 EOM
 }
 { type: upgrade
-  maximum_version: "2.4.1_1"
+  maximum_version: "2.6.2"
   message: <<EOM
 daemon(8) now restarts the agent if it exits, and /var/run/bao/openbao_agent.pid
 now holds the supervisor's pid instead of the agent's. Restart the agent after

@@ -13,7 +13,7 @@
 #						Default is "%%USER%%".
 # openbao_agent_group (group):			Set group to run openbao agent.
 #						Default is "%%GROUP%%".
-# openbao_agent_config (file):			Set openbao agent config file.
+# openbao_agent_config (file):			Set openbao agent config file or directory.
 #						Default is "%%PREFIX%%/etc/bao-agent.hcl".
 # openbao_agent_sinkdir (path):			Optional directory for agent file sink output.
 #						Default is empty (disabled).
@@ -27,6 +27,9 @@
 #						Default is "info". See daemon(8).
 # openbao_agent_syslog_output_facility (str):	Set syslog facility if syslog enabled.
 #						Default is "daemon". See daemon(8).
+#
+# daemon(8) supervises the agent and restarts it 5s after it exits. The
+# pidfile holds the supervisor's pid, so stop ends the agent without a respawn.
 
 . /etc/rc.subr
 
@@ -66,9 +69,8 @@ else
 fi
 
 pidfile="/var/run/bao/${name}.pid"
-procname="%%PREFIX%%/bin/bao"
 command="/usr/sbin/daemon"
-command_args="-f -t ${name} ${openbao_agent_syslog_output_flags} -p ${pidfile} -o ${openbao_agent_logfile} ${procname} agent -config=${openbao_agent_config}"
+command_args="-f -R 5 -H -t ${name} ${openbao_agent_syslog_output_flags} -P ${pidfile} -u ${openbao_agent_user} -o ${openbao_agent_logfile} %%PREFIX%%/bin/bao agent -config=${openbao_agent_config}"
 
 start_precmd=openbao_agent_startprecmd
 required_files="${openbao_agent_config}"
@@ -84,10 +86,6 @@ openbao_agent_startprecmd()
 	elif [ -n "${openbao_agent_sinkdir}" ] && [ -d "${openbao_agent_sinkdir}" ]; then
 		chown ${openbao_agent_user}:${openbao_agent_sinkdir_group} "${openbao_agent_sinkdir}"
 		chmod ${openbao_agent_sinkdir_mode} "${openbao_agent_sinkdir}"
-	fi
-
-	if [ ! -e ${pidfile} ]; then
-		install -o ${openbao_agent_user} -g ${openbao_agent_group} -m 644 /dev/null ${pidfile}
 	fi
 
 	if [ ! -e ${openbao_agent_logfile} ]; then

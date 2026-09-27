@@ -1,2 +1,2 @@
-# logfilename				[owner:group]	mode	count	size	when	flags
-/var/log/openbao_agent.log			openbao:openbao	640	7	1000	*	JB
+# logfilename				[owner:group]	mode	count	size	when	flags	[/pid_file]	[sig_num]
+/var/log/openbao_agent.log			openbao:openbao	640	7	1000	*	JB	/var/run/bao/openbao_agent.pid	1

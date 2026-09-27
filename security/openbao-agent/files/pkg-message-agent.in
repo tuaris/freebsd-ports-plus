@@ -33,12 +33,9 @@ EOM
 { type: upgrade
   maximum_version: "2.4.1_1"
   message: <<EOM
-The agent now runs as openbao_agent_user (default %%USER%%) instead of root,
-and daemon(8) restarts it if it exits. Sink files and template destinations
-must be writable by that user; to keep the previous behaviour set
-  sysrc openbao_agent_user=root
-In minimal jails daemon(8) -u needs a usable login.conf (cap_mkdb
-/etc/login.conf). Restart the agent after upgrading:
+daemon(8) now restarts the agent if it exits, and /var/run/bao/openbao_agent.pid
+now holds the supervisor's pid instead of the agent's. Restart the agent after
+upgrading so the running instance picks this up:
   service openbao_agent restart
 EOM
 }

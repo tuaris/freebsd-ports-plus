@@ -11,6 +11,9 @@ WWW=		https://github.com/tuaris/mac_do_auto
 LICENSE=	BSD2CLAUSE
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
+IGNORE_FreeBSD_13=	kernel module uses interfaces added in FreeBSD 15
+IGNORE_FreeBSD_14=	kernel module uses interfaces added in FreeBSD 15
+
 USES=		kmod uidfix zig:015
 
 USE_GITHUB=	yes

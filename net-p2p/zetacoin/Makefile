@@ -28,6 +28,10 @@ USE_QT=		base tools:build
 USE_GL=		opengl
 .endif
 
+# Boost 1.92 only declares boost::multi_index::indexed_by; txmempool.h
+# derives from it, which needs the MPL-based definition.
+CXXFLAGS+=	-DBOOST_MULTI_INDEX_ENABLE_MPL_SUPPORT
+
 CMAKE_ARGS?=	-DBUILD_GUI=ON \
 		-DBUILD_BITCOIN_BIN=OFF \
 		-DBUILD_CLI=OFF \

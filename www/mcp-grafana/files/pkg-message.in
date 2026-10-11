@@ -1,25 +1,25 @@
 [
 { type: install
   message: <<EOM
-mcp-grafana is installed but not enabled. To run it as a service:
+mcp-grafana runs as the grafana user and group, created by www/grafana.
 
-  1. Create the environment file (mode 0600, root only) from the sample:
-       cp %%PREFIX%%/etc/mcp_grafana.env.sample %%PREFIX%%/etc/mcp_grafana.env
-     and set GRAFANA_URL. Set MCP_GRAFANA_SERVER_TOKEN to require a bearer
-     token from clients.
+To run it as a service:
 
-  2. Enable and configure it in /etc/rc.conf:
+  1. Set GRAFANA_URL, and optionally tokens, in the environment file the
+     package created from the sample (mode 0600):
+       %%PREFIX%%/etc/mcp_grafana.env
+
+  2. Enable it in /etc/rc.conf, passing any mcp-grafana options in
+     mcp_grafana_flags:
        mcp_grafana_enable="YES"
-       mcp_grafana_address="0.0.0.0:8443"
-       mcp_grafana_allowed_hosts="mcp.example.com:8443"
-       mcp_grafana_tls_cert="/path/to/fullchain.pem"
-       mcp_grafana_tls_key="/path/to/key.pem"
+       mcp_grafana_flags="--address 0.0.0.0:8443 --allowed-hosts mcp.example.com:8443"
 
   3. service mcp_grafana start
 
-The server only accepts loopback Host names unless mcp_grafana_allowed_hosts
-is set, and it serves plain HTTP unless both TLS files are given. Clients
-send their Grafana token in X-Grafana-Service-Account-Token.
+Without --address the server listens on localhost:8000. Once --allowed-hosts is
+given, only those Host names are accepted. For HTTPS add --server.tls-cert-file
+and --server.tls-key-file; the key must be readable by the grafana user.
+Output goes to syslog.
 EOM
 }
 ]

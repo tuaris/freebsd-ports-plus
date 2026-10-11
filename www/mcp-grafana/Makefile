@@ -24,15 +24,11 @@ GO_MOD_DIST=	github
 GO_TARGET=	./cmd/mcp-grafana
 GO_LDFLAGS=	-X ${GO_MODULE}.version=${DISTVERSION}
 
-MCP_GRAFANA_USER?=	mcpgrafana
-MCP_GRAFANA_GROUP?=	mcpgrafana
+# Shares the account created by www/grafana (904).
+USERS=		grafana
+GROUPS=		grafana
 
-USERS=		${MCP_GRAFANA_USER}
-GROUPS=		${MCP_GRAFANA_GROUP}
-
-SUB_LIST=	MCP_GRAFANA_GROUP=${MCP_GRAFANA_GROUP} \
-		MCP_GRAFANA_USER=${MCP_GRAFANA_USER}
-PLIST_SUB=	${SUB_LIST}
+SUB_LIST=	GROUPS=${GROUPS} USERS=${USERS}
 
 post-install:
 	${INSTALL_DATA} ${FILESDIR}/mcp_grafana.env.sample \

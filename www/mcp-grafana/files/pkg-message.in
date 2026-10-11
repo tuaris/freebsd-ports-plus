@@ -1,0 +1,25 @@
+[
+{ type: install
+  message: <<EOM
+mcp-grafana is installed but not enabled. To run it as a service:
+
+  1. Create the environment file (mode 0600, root only) from the sample:
+       cp %%PREFIX%%/etc/mcp_grafana.env.sample %%PREFIX%%/etc/mcp_grafana.env
+     and set GRAFANA_URL. Set MCP_GRAFANA_SERVER_TOKEN to require a bearer
+     token from clients.
+
+  2. Enable and configure it in /etc/rc.conf:
+       mcp_grafana_enable="YES"
+       mcp_grafana_address="0.0.0.0:8443"
+       mcp_grafana_allowed_hosts="mcp.example.com:8443"
+       mcp_grafana_tls_cert="/path/to/fullchain.pem"
+       mcp_grafana_tls_key="/path/to/key.pem"
+
+  3. service mcp_grafana start
+
+The server only accepts loopback Host names unless mcp_grafana_allowed_hosts
+is set, and it serves plain HTTP unless both TLS files are given. Clients
+send their Grafana token in X-Grafana-Service-Account-Token.
+EOM
+}
+]

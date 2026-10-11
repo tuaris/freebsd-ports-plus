@@ -1,0 +1,103 @@
+#!/bin/sh
+
+# PROVIDE: mcp_grafana
+# REQUIRE: LOGIN NETWORKING
+# KEYWORD: shutdown
+
+# Add the following lines to /etc/rc.conf to enable mcp_grafana:
+#
+# mcp_grafana_enable (bool):
+#     Set it to YES to enable mcp_grafana.
+#     Set to NO by default.
+# mcp_grafana_user (string):
+#     User the server runs as.
+#     Default is "%%MCP_GRAFANA_USER%%".
+# mcp_grafana_group (string):
+#     Group of the server and its log files.
+#     Default is "%%MCP_GRAFANA_GROUP%%".
+# mcp_grafana_env_file (string):
+#     File rc.subr sources as root before dropping privileges. Put GRAFANA_URL
+#     and the credentials here and keep it mode 0600; variables set on the
+#     command line are visible to every user in ps(1).
+#     Default is "%%PREFIX%%/etc/mcp_grafana.env".
+# mcp_grafana_address (string):
+#     Address and port to listen on.
+#     Default is "127.0.0.1:8000".
+# mcp_grafana_allowed_hosts (string):
+#     Comma-separated Host header values the server accepts. When empty, only
+#     loopback names derived from the listen address are accepted, so set this
+#     to the name clients use whenever the server is reachable from another
+#     host.
+#     Default is "".
+# mcp_grafana_tls_cert (string):
+#     Server certificate chain, PEM. Set together with mcp_grafana_tls_key to
+#     serve HTTPS.
+#     Default is "".
+# mcp_grafana_tls_key (string):
+#     Server private key, PEM. Must be readable by mcp_grafana_user.
+#     Default is "".
+# mcp_grafana_logfile (string):
+#     Log file.
+#     Default is "/var/log/mcp_grafana/mcp_grafana.log".
+# mcp_grafana_loglevel (string):
+#     One of debug, info, warn, error.
+#     Default is "info".
+# mcp_grafana_args (string):
+#     Additional command line arguments, e.g. "--disable-write".
+#     Default is "".
+#
+# Caller authentication: set MCP_GRAFANA_SERVER_TOKEN in the env file to
+# require "Authorization: Bearer <token>" from every client.
+
+. /etc/rc.subr
+
+name=mcp_grafana
+rcvar=mcp_grafana_enable
+
+load_rc_config $name
+
+: ${mcp_grafana_enable:="NO"}
+: ${mcp_grafana_user:="%%MCP_GRAFANA_USER%%"}
+: ${mcp_grafana_group:="%%MCP_GRAFANA_GROUP%%"}
+: ${mcp_grafana_env_file:="%%PREFIX%%/etc/mcp_grafana.env"}
+: ${mcp_grafana_address:="127.0.0.1:8000"}
+: ${mcp_grafana_allowed_hosts:=""}
+: ${mcp_grafana_tls_cert:=""}
+: ${mcp_grafana_tls_key:=""}
+: ${mcp_grafana_logfile:="/var/log/mcp_grafana/mcp_grafana.log"}
+: ${mcp_grafana_loglevel:="info"}
+: ${mcp_grafana_args:=""}
+
+pidfile="/var/run/${name}/${name}.pid"
+supervisor_pidfile="/var/run/${name}/${name}.supervisor.pid"
+required_files="${mcp_grafana_env_file}"
+
+procname="%%PREFIX%%/bin/mcp-grafana"
+command="/usr/sbin/daemon"
+# -p is the server, which rc.subr signals on stop. -P is the supervisor, which
+# newsyslog(8) signals with SIGHUP so daemon reopens the log (-H). A SIGHUP
+# delivered to the server itself terminates it.
+command_args="-f -H -p ${pidfile} -P ${supervisor_pidfile} -t ${name} \
+	-o ${mcp_grafana_logfile} \
+	${procname} -t streamable-http \
+	--address ${mcp_grafana_address} \
+	--log-level ${mcp_grafana_loglevel} \
+	${mcp_grafana_allowed_hosts:+--allowed-hosts ${mcp_grafana_allowed_hosts}} \
+	${mcp_grafana_tls_cert:+--server.tls-cert-file ${mcp_grafana_tls_cert}} \
+	${mcp_grafana_tls_key:+--server.tls-key-file ${mcp_grafana_tls_key}} \
+	${mcp_grafana_args}"
+
+start_precmd="mcp_grafana_precmd"
+
+mcp_grafana_precmd()
+{
+	install -d -m 0750 -o ${mcp_grafana_user} -g ${mcp_grafana_group} \
+		"/var/run/${name}" "/var/log/mcp_grafana"
+
+	# A readable env file would expose the Grafana and caller tokens.
+	if [ -n "$(find "${mcp_grafana_env_file}" -perm -0044 2>/dev/null)" ]; then
+		warn "${mcp_grafana_env_file} is readable by group or others; chmod 0600 it"
+	fi
+}
+
+run_rc_command "$1"

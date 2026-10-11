@@ -16,6 +16,7 @@ Extra FreeBSD ports not yet available in the official FreeBSD ports tree. Pre-bu
 | `net/sse-keepalive` | SSE keep-alive shim for streaming LLM providers (kqueue, multi-process) |
 | `security/openbao-agent` | OpenBao Agent - auto-auth and token sink daemon |
 | `sysutils/terragrunt487` | Terragrunt 0.48.7 - Thin wrapper for Terraform |
+| `www/mcp-grafana` | Grafana MCP server, runs as a standalone HTTPS service with caller authentication |
 | `www/sunlight` | Sunlight - Certificate Transparency log implementation |
 
 > **Note:** `security/openbao` is already part of the official FreeBSD ports tree and does not need this overlay.

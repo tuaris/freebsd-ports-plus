@@ -1,0 +1,11 @@
+mcp-grafana is a Model Context Protocol (MCP) server that lets AI assistants
+work with a Grafana instance and the systems behind it: search and edit
+dashboards, query Prometheus, Loki, Tempo and Pyroscope data sources, inspect
+alerting rules and incidents, and generate deeplinks.
+
+It runs either as a stdio child of an MCP client or, with -t streamable-http, as
+a standalone network service that serves many clients. In service mode each
+client can send its own Grafana service account token, and the server can
+require a bearer token from callers and serve HTTPS.
+
+The port installs an rc.d script. See pkg-message for the settings.

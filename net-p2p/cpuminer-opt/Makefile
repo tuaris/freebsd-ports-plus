@@ -1,5 +1,6 @@
 PORTNAME=	cpuminer-opt
 DISTVERSION=	26.1
+PORTREVISION=	1
 CATEGORIES=	net-p2p
 MASTER_SITES=	GH
 
@@ -23,7 +24,10 @@ GH_TAGNAME=	v${DISTVERSION}
 
 GNU_CONFIGURE=	yes
 CONFIGURE_ARGS=	--with-curl=${LOCALBASE}
-CONFIGURE_ENV=	CFLAGS="-O3 -march=native -Wall"
+
+# SIMD code paths are selected at compile time. Packages target the baseline
+# ISA so they run on any CPU; set CPUTYPE to build for a newer one.
+CFLAGS+=	-O3
 
 ONLY_FOR_ARCHS=	amd64 aarch64
 

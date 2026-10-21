@@ -1,0 +1,14 @@
+[
+{ type: install
+  message: <<EOM
+cpuminer-opt selects its SIMD code paths at compile time. This package is
+built for the baseline instruction set so it runs on any CPU, which leaves
+AVX2, AVX-512, SHA and VAES hashing paths disabled.
+
+For full speed, build the port from a ports tree with CPUTYPE set for the
+mining host, for example in /etc/make.conf:
+
+  CPUTYPE?=native
+EOM
+}
+]

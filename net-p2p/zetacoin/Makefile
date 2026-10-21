@@ -1,8 +1,11 @@
 PORTNAME=	zetacoin
 DISTVERSIONPREFIX=	v
 DISTVERSION=	0.14.1
-PORTREVISION=	1
+PORTREVISION=	2
 CATEGORIES=	net-p2p finance
+# Build fix for Boost 1.92, https://github.com/zetacoin-core/gui/pull/8
+PATCH_SITES=	https://github.com/zetacoin-core/gui/commit/
+PATCHFILES=	744c2f16539c81c3b1bd7f15f51067d7de58af5f.patch:-p1
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	zetacoin-core

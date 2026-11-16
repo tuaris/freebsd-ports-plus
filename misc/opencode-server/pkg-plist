@@ -1,0 +1,8 @@
+@sample etc/opencode_serve.env.sample
+@owner %%OPENCODE_USER%%
+@group %%OPENCODE_GROUP%%
+@mode 750
+@dir %%OPENCODE_DATADIR%%
+@mode
+@group
+@owner

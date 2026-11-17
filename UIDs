@@ -1,4 +1,3 @@
 arcadedb:*:801:801::0:0:ArcadeDB Daemon:/var/db/arcadedb:/usr/sbin/nologin
 pherb:*:803:803::0:0:Pherb Daemon:/nonexistent:/usr/sbin/nologin
-opencode:*:805:805::0:0:OpenCode Server:/var/db/opencode:/usr/sbin/nologin
 ssekeepalive:*:822:822::0:0:SSE Keep-Alive Shim:/nonexistent:/usr/sbin/nologin

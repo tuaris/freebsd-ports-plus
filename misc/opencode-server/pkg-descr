@@ -1,0 +1,10 @@
+OpenCode is an AI coding agent for the terminal. This companion port installs
+the opencode_serve rc.d boot service that runs `opencode serve` as an
+unprivileged user, so the OpenCode Desktop app and `opencode attach` clients
+can connect to a persistent remote server.
+
+It sources an env file for secrets (provider API keys and an HTTP basic auth
+password), listens on 127.0.0.1:4555 by default for SSH-tunnel access, and
+preserves persistent terminals across service restarts through a PTY handoff.
+
+The opencode binary itself is installed by misc/opencode.

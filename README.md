@@ -9,6 +9,8 @@ Extra FreeBSD ports not yet available in the official FreeBSD ports tree. Pre-bu
 | `databases/arcadedb` | ArcadeDB - Multi-model database (pending upstream PR) |
 | `databases/mongodb50` | MongoDB Community Edition 5.0.x (preserved after upstream EOL removal) |
 | `databases/mongodb60` | MongoDB Community Edition 6.0.x (preserved after upstream EOL removal) |
+| `misc/opencode` | OpenCode AI coding agent — FreeBSD SIGUSR1 fix (overrides the official port pending upstream acceptance) |
+| `misc/opencode-server` | Boot service (rc.d) for the OpenCode AI coding agent server |
 | `net-p2p/bfgminer` | BFGMiner - Modular ASIC/FPGA Bitcoin miner (FreeBSD fork) |
 | `net-p2p/cpuminer-opt` | CPU miner with architecture-specific optimizations |
 | `net/pecl-zmq` | PHP ZMQ extension - ZeroMQ bindings (PHP 8.5 patched) |
@@ -19,6 +21,8 @@ Extra FreeBSD ports not yet available in the official FreeBSD ports tree. Pre-bu
 | `www/sunlight` | Sunlight - Certificate Transparency log implementation |
 
 > **Note:** `security/openbao` is already part of the official FreeBSD ports tree and does not need this overlay.
+
+> **Note:** `misc/opencode-server` installs only the boot service; the `opencode` binary is a runtime dependency. This overlay carries a patched `misc/opencode` (the FreeBSD SIGUSR1 heap-listener fix, proposed upstream as anomalyco/opencode#64312) that shadows the official port, so the fixed binary is available here before the official maintainer accepts the change. Once the fix lands in the official tree, the overlay's `misc/opencode` can be dropped.
 
 ## Enabling the Ports Plus Repository
 
